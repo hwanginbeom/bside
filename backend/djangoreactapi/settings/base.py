@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'post', #추가
     'rest_framework', #추가
     'corsheaders',  # 추가
-
+    'drf_yasg',  # 추가
 ]
 
 REST_FRAMEWORK = {

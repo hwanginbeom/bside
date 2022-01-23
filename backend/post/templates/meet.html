@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>진짜</title>
+</head>
+<body>
+배고프다.
+{% for meet_infor in meet_infors %}
+    <br>
+    {{ meet_infor.meet_agenda1 }}
+    <br>
+    {{ meet_infor.meet_agenda2 }}
+    <br>
+    {{ meet_infor.meet_agenda3 }}
+    <br>
+    {{ meet_infor.meet_record }}
+
+{% endfor %}
+</body>
+</html>

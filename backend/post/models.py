@@ -9,18 +9,51 @@ class Post(models.Model):
         """A string representation of the model."""
         return self.title
 
-class Meet_infor(models.Model):
-    meet_number = models.CharField(max_length=200)
-    meet_name = models.CharField(max_length=200)
-    meet_agenda1 = models.TextField()
-    meet_agenda2 = models.TextField()
-    meet_agenda3 = models.TextField()
-    meet_agenda4 = models.TextField()
-    meet_agenda5 = models.TextField()
-    total_time = models.CharField(max_length=200)
-    next_time = models.CharField(max_length=200)
-    meet_record = models.TextField()
+
+class User(models.Model):
+    user_id = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
+    nickname = models.CharField(max_length=200)
 
     def __str__(self):
         """A string representation of the model."""
-        return self.meet_number
+        return self.user_id
+
+
+class Meet(models.Model):
+    user_id = models.CharField(max_length=200)
+    meet_id = models.CharField(max_length=200)
+    meet_title = models.TextField()
+    meet_date = models.DateTimeField()
+    status = models.CharField(max_length=200)
+    participants = models.TextField()
+    goal = models.TextField()
+    last_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return self.meet_id
+
+class Agenda(models.Model):
+    meet_id = models.CharField(max_length=200)
+    agenda_id = models.CharField(max_length=200)
+    agenda_title = models.TextField(default='')
+    discussion = models.TextField()
+    decisions = models.TextField()
+    setting_time = models.IntegerField()
+    progress_time = models.IntegerField(null=True)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return self.agenda_id
+
+class Action(models.Model):
+    agenda_id = models.CharField(max_length=200)
+    action_id = models.CharField(max_length=200)
+    action_title = models.TextField()
+    person = models.TextField(null=True)
+    dead_line = models.DateTimeField(null=True)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return self.action_id

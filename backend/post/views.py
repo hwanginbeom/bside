@@ -1,21 +1,27 @@
 #backend/post/views.py
 from django.shortcuts import render
-from rest_framework import generics
+from rest_framework import generics,viewsets
 from django.shortcuts import render
 
 from .models import *
-from .serializers import PostSerializer
+from .serializers import *
 
-class ListPost(generics.ListCreateAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
 
-class DetailPost(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Post.objects.all()
-    serializer_class = PostSerializer
+class UserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
 
-def meet_set(request):
-    meet_infors = Meet_infor.objects.all()
-    posts = Post.objects.all()
-    # return render(request, 'post_list.html', {})
-    return render(request, 'post_list.html', {'meet_infors': meet_infors})
+
+class MeetViewSet(viewsets.ModelViewSet):
+    queryset = Meet.objects.all()
+    serializer_class = MeetSerializer
+
+
+class AgendaViewSet(viewsets.ModelViewSet):
+    queryset = Agenda.objects.all()
+    serializer_class = AgendaSerializer
+
+
+class ActionViewSet(viewsets.ModelViewSet):
+    queryset = Action.objects.all()
+    serializer_class = ActionSerializer

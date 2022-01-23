@@ -9,10 +9,12 @@ schema_url_patterns = [ path('', include('post.urls')), ]
 
 schema_view_v1 = get_schema_view(
     openapi.Info(
-        title="Open API",
+        title="59 API",
         default_version='v1',
         description="시스템 API",
         terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="rydn2004@naver.com")
+
     ),
     public=True,
     permission_classes=(AllowAny,),

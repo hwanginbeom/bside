@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
 class Post(models.Model):
@@ -10,14 +11,15 @@ class Post(models.Model):
         return self.title
 
 
-class User(models.Model):
-    user_id = models.CharField(max_length=200)
-    email = models.CharField(max_length=200)
-    nickname = models.CharField(max_length=200)
+class User(AbstractUser):
+    email = models.CharField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    username = models.CharField(max_length=200, null=True)
+    nickname = models.CharField(max_length=200, unique=True, null=True)
 
     def __str__(self):
         """A string representation of the model."""
-        return self.user_id
+        return self.email
 
 
 class Meet(models.Model):

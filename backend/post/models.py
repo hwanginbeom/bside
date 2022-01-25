@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
 # Create your models here.
 class Post(models.Model):
@@ -11,15 +11,6 @@ class Post(models.Model):
         return self.title
 
 
-class User(AbstractUser):
-    email = models.CharField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
-    username = models.CharField(max_length=200, null=True)
-    nickname = models.CharField(max_length=200, unique=True, null=True)
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.email
 
 
 class Meet(models.Model):
@@ -59,3 +50,56 @@ class Action(models.Model):
     def __str__(self):
         """A string representation of the model."""
         return self.action_id
+
+#로그인 유저
+
+class UserManager(BaseUserManager):
+    def create_user(self, email, username=None, nickname=None, password=None):
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.model(
+            email=self.normalize_email(email),
+            username=username,
+            nickname=nickname,
+        )
+
+        user.set_password(password)
+        user.save(using=self.db)
+        return user
+
+    def create_superuser(self, email, password=None):
+        if not email:
+            raise ValueError('Users must have an email address')
+
+        user = self.create_user(
+            email=email,
+            password=password
+        )
+
+        user.is_superuser = True
+        user.save(using=self.db)
+
+        return user
+
+class User(AbstractBaseUser, PermissionsMixin):
+    email = models.CharField(max_length=200, unique=True)
+    password = models.CharField(max_length=200)
+    username = models.CharField(max_length=200, null=True)
+    nickname = models.CharField(max_length=200, null=True)
+    provider = models.CharField(max_length=200, null=True)
+
+    USERNAME_FIELD = 'email'
+    REQUIRED_FIELDS = []
+
+    objects = UserManager()
+
+    def __str__(self):
+        """A string representation of the model."""
+        return self.email
+
+    @property
+    def is_staff(self):
+        "Is the user a member of staff?"
+        # Simplest possible answer: All superusers are staff
+        return self.is_superuser

@@ -47,15 +47,6 @@ class Migration(migrations.Migration):
                 ('last_time', models.DateField()),
             ],
         ),
-        migrations.CreateModel(
-            name='user',
-            fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user_id', models.CharField(max_length=200)),
-                ('email', models.CharField(max_length=200)),
-                ('nickname', models.CharField(max_length=200)),
-            ],
-        ),
         migrations.DeleteModel(
             name='meet_infor',
         ),

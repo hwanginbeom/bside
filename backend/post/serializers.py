@@ -1,4 +1,5 @@
 #backend/post/serializers.py
+from django.contrib.auth import get_user_model
 from rest_framework import serializers
 from .models import *
 
@@ -52,3 +53,28 @@ class ActionSerializer(serializers.ModelSerializer):
             'person',
             'dead_line',
         )
+
+
+User = get_user_model()
+
+class UsercreateSerializer(serializers.Serializer):
+    email = serializers.EmailField(max_length=200, required=True)
+    username = serializers.CharField(max_length=200, required=False)
+    nickname = serializers.CharField(max_length=200, required=False)
+    password = serializers.CharField(max_length=200, required=False)
+    provider = serializers.CharField(max_length=200, required=False)
+    print(serializers.Serializer)
+    print(User)
+
+    def create(self, validated_data):
+        user = User.objects.create(
+            email=validated_data['email'],
+            username=validated_data['username'],
+            provider=validated_data['provider'],
+            password=validated_data['password'],
+            nickname=validated_data['nickname'],
+        )
+        user.save()
+        print(user)
+        return user
+

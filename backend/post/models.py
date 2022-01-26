@@ -54,7 +54,7 @@ class Action(models.Model):
 #로그인 유저
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username=None, nickname=None, password=None):
+    def create_user(self, email, username=None, nickname=None, password=None, provider=None):
         if not email:
             raise ValueError('Users must have an email address')
 
@@ -62,6 +62,7 @@ class UserManager(BaseUserManager):
             email=self.normalize_email(email),
             username=username,
             nickname=nickname,
+            provider=provider,
         )
 
         user.set_password(password)

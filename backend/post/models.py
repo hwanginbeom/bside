@@ -84,11 +84,12 @@ class UserManager(BaseUserManager):
         return user
 
 class User(AbstractBaseUser, PermissionsMixin):
-    email = models.CharField(max_length=200, unique=True)
+    email = models.EmailField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
     username = models.CharField(max_length=200, null=True)
     nickname = models.CharField(max_length=200, null=True)
     provider = models.CharField(max_length=200, null=True)
+    last_login = models.DateTimeField(null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

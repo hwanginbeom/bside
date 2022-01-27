@@ -3,6 +3,7 @@ from django.http import JsonResponse
 from rest_framework import generics, viewsets
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -29,18 +30,32 @@ class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
 
+# class login(generics.GenericAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserloginSerializer
+#
+#     def post(self, request, *args, **kwargs):
+#         serializer = self.get_serializer(data=request.data)
+#         serializer.is_valid(raise_exception=True)
+#         user = serializer.data
+#         serializer.save()
+#         return Response(user)
+
 
 @api_view(['POST'])
-# @permission_classes(['AllowAny'])
+@permission_classes([AllowAny])
 def login(request):
-    serializer = UsercreateSerializer(data=request.data)
+    serializer = UserloginSerializer(Post, data=request.data, many=True)
     print(serializer)
+    # serializer.is_valid(raise_exception=True)
     if serializer.is_valid(raise_exception=True):
+        print('asdasd')
+    #     print(serializer)
         serializer.save()
-        return JsonResponse(serializer.data, status=200)
+        return Response(serializer.data)
 
 #
-# class login(APIView):
+# class login():
 #     def post(self, request, *args, **kwargs):
 #         print(self)
 #         print(request)

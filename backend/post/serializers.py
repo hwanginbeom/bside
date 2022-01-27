@@ -8,7 +8,6 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'user_id',
             'email',
             'nickname',
         )
@@ -58,13 +57,11 @@ class ActionSerializer(serializers.ModelSerializer):
 User = get_user_model()
 
 class UsercreateSerializer(serializers.Serializer):
-    email = serializers.EmailField(max_length=200, required=True)
-    username = serializers.CharField(max_length=200, required=False)
-    nickname = serializers.CharField(max_length=200, required=False)
-    password = serializers.CharField(max_length=200, required=False)
-    provider = serializers.CharField(max_length=200, required=False)
-    print(serializers.Serializer)
-    print(User)
+    # email = serializers.CharField(max_length=200, required=True)
+    # username = serializers.CharField(max_length=200, required=False)
+    # nickname = serializers.CharField(max_length=200, required=False)
+    # password = serializers.CharField(max_length=200, required=False)
+    # provider = serializers.CharField(max_length=200, required=False)
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -75,6 +72,14 @@ class UsercreateSerializer(serializers.Serializer):
             nickname=validated_data['nickname'],
         )
         user.save()
-        print(user)
         return user
-
+#
+class UserloginSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['id', 'password', 'email', 'username', 'provider', 'nickname']
+    # password = serializers.CharField(max_length=200, required=False)
+    # email = serializers.CharField(max_length=200, required=True)
+    # username = serializers.CharField(max_length=200, required=False)
+    # provider = serializers.CharField(max_length=200, required=False)
+    # nickname = serializers.CharField(max_length=200, required=False)

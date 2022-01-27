@@ -8,6 +8,7 @@ router.register('user', views.UserViewSet)
 router.register('meet', views.MeetViewSet)
 router.register('agenda', views.AgendaViewSet)
 router.register('action', views.ActionViewSet)
+# router.register('login', views.login)
 
 urlpatterns = [
     path('', include(router.urls)),

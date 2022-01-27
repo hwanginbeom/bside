@@ -103,7 +103,7 @@ DATABASES = {
         'NAME': 'bside',
         'USER': 'root',
         # 'PASSWORD': '',
-        'PASSWORD': '1234qwer', #대영
+        'PASSWORD': '', #대영
         'HOST': 'localhost',
         'PORT': '3306',
      }

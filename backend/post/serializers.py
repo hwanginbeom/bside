@@ -7,9 +7,11 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'user_id',
             'email',
+            'password',
+            'username',
             'nickname',
+            'provider',
         )
 
 
@@ -17,7 +19,7 @@ class MeetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meet
         fields = (
-            'user_id',
+            'email',
             'meet_id',
             'meet_title',
             'meet_date',

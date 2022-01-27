@@ -14,7 +14,7 @@ class Post(models.Model):
 
 
 class Meet(models.Model):
-    user_id = models.CharField(max_length=200)
+    email = models.CharField(max_length=200)
     meet_id = models.CharField(max_length=200)
     meet_title = models.TextField()
     meet_date = models.DateTimeField()

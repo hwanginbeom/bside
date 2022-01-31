@@ -45,22 +45,11 @@ class ActionViewSet(viewsets.ModelViewSet):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):
-    serializer = UserloginSerializer(Post, data=request.data, many=True)
+    serializer = UserloginSerializer(data=request.data, many=True)
     print(serializer)
-    # serializer.is_valid(raise_exception=True)
+    # serializer.is_valid()
     if serializer.is_valid(raise_exception=True):
-        print('asdasd')
-    #     print(serializer)
         serializer.save()
         return Response(serializer.data)
 
-#
-# class login():
-#     def post(self, request, *args, **kwargs):
-#         print(self)
-#         print(request)
-#         serializer = UsercreateSerializer(data=request.data, many=True)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data, status=200)
 

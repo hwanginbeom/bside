@@ -43,15 +43,16 @@ function GoogleLoginBtn({ onGoogleLogin }) {
         const { googleId, profileObj: { email, name },} = res
 
         let data = {
-            GoogleId : googleId,
-            Email : email,
-            Name : name,
-            Provider : 'google'
+            'password' : googleId,
+            'email' : email,
+            'username' : name,
+            'provider' : 'google',
+            'nickname' : ''
         };       
         
         console.log(data)    
         
-        axios.post('http://127.0.0.1:8000/api/login/', data).then(res => {
+        axios.post('http://127.0.0.1:8000/api/login/', [{'email': email, 'password': googleId, 'username': name, 'provider': 'google'}]).then(res => {
             console.log(res)
         })
     }

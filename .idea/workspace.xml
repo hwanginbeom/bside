@@ -3,212 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/autocomplete.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/changelists.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/dashboard.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/fonts.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/forms.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/login.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/nav_sidebar.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/responsive.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/responsive_rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/rtl.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/vendor/select2/LICENSE-SELECT2.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/vendor/select2/select2.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/vendor/select2/select2.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/css/widgets.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/fonts/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/fonts/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/fonts/Roboto-Bold-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/fonts/Roboto-Light-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/fonts/Roboto-Regular-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/README.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/calendar-icons.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/gis/move_vertex_off.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/gis/move_vertex_on.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-addlink.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-alert.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-calendar.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-changelink.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-clock.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-deletelink.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-no.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-unknown-alt.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-unknown.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-viewlink.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/icon-yes.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/inline-delete.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/search.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/selector-icons.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/sorting-icons.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/tooltag-add.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/img/tooltag-arrowright.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/SelectBox.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/SelectFilter2.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/actions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/actions.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/admin/DateTimeShortcuts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/admin/RelatedObjectLookups.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/autocomplete.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/calendar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/cancel.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/change_form.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/collapse.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/collapse.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/core.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/inlines.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/inlines.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/jquery.init.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/nav_sidebar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/popup_response.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/prepopulate.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/prepopulate.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/prepopulate_init.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/urlify.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/jquery/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/jquery/jquery.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/jquery/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/LICENSE.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/af.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/az.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/bg.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/bn.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/bs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ca.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/cs.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/da.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/de.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/dsb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/el.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/en.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/es.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/et.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/eu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/fa.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/fi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/fr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/gl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/he.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/hi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/hr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/hsb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/hu.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/hy.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/id.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/is.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/it.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ja.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ka.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/km.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ko.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/lt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/lv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/mk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ms.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/nb.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ne.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/nl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/pl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ps.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/pt-BR.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/pt.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ro.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/ru.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sq.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sr-Cyrl.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/sv.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/th.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/tk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/tr.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/uk.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/vi.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/zh-CN.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/i18n/zh-TW.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/select2.full.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/select2/select2.full.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/xregexp/LICENSE.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/xregexp/xregexp.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/admin/js/vendor/xregexp/xregexp.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/immutable.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/insQ.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/redoc-init.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/redoc-old/redoc.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/redoc/redoc-logo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/redoc/redoc.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/absolute-path.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/favicon-32x32.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/oauth2-redirect.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/swagger-ui-bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/swagger-ui-es-bundle-core.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/swagger-ui-es-bundle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/swagger-ui-standalone-preset.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-dist/swagger-ui.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/swagger-ui-init.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/drf-yasg/url-polyfill.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/bootstrap-theme.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/bootstrap-tweaks.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/default.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/font-awesome-4.0.3.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/css/prettify.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/css/base.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/css/highlight.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/css/jquery.json-view.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/img/favicon.ico" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/img/grid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/js/api.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/js/highlight.pack.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/docs/js/jquery.json-view.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/fontawesome-webfont.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/fontawesome-webfont.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/fontawesome-webfont.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/fontawesome-webfont.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/glyphicons-halflings-regular.eot" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/glyphicons-halflings-regular.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/glyphicons-halflings-regular.ttf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/glyphicons-halflings-regular.woff" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/fonts/glyphicons-halflings-regular.woff2" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/img/glyphicons-halflings-white.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/img/glyphicons-halflings.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/img/grid.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/ajax-form.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/coreapi-0.1.1.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/csrf.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/default.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/jquery-3.5.1.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/.static_root/rest_framework/js/prettify-min.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/backend/requirements.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/_exceptions.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/_mysql.cp37-win_amd64.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/connections.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/CLIENT.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/CR.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/ER.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/FIELD_TYPE.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/FLAG.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/constants/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/converters.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/cursors.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/release.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/MySQLdb/times.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/INSTALLER" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/LICENSE" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/METADATA" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/RECORD" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/REQUESTED" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/WHEEL" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/window_venv/Lib/site-packages/mysqlclient-2.1.0.dist-info/top_level.txt" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -221,7 +16,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/mysite/config/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
+            <state relative-caret-position="-265">
               <caret line="6" selection-start-line="6" selection-end-line="6" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
@@ -251,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/backend/mysite/config/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="223">
-              <caret line="123" column="15" lean-forward="true" selection-start-line="123" selection-start-column="15" selection-end-line="123" selection-end-column="15" />
+            <state relative-caret-position="109">
+              <caret line="134" column="22" lean-forward="true" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
               <folding>
                 <element signature="e#307#331#0" expanded="true" />
               </folding>
@@ -263,7 +58,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/backend/requirements.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="114">
@@ -326,6 +121,9 @@
       <find>mysql</find>
       <find>BASE_DIR</find>
       <find>STATIC_URL</find>
+      <find>STATIC_ROOT</find>
+      <find>TEMPLATES</find>
+      <find>REST_FRAMEWORK</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -342,14 +140,14 @@
         <option value="$PROJECT_DIR$/backend/mysite/config/urls.py" />
         <option value="$PROJECT_DIR$/window_venv/Lib/site-packages/django/core/management/commands/diffsettings.py" />
         <option value="$PROJECT_DIR$/backend/mysite/config/settings/base.py" />
-        <option value="$PROJECT_DIR$/backend/mysite/config/settings.py" />
         <option value="$PROJECT_DIR$/backend/requirements.txt" />
+        <option value="$PROJECT_DIR$/backend/mysite/config/settings.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="187" />
-    <option name="y" value="-23" />
+    <option name="x" value="186" />
+    <option name="y" value="-24" />
     <option name="width" value="1944" />
     <option name="height" value="1044" />
   </component>
@@ -381,15 +179,7 @@
               <item name="0203" type="b2602c69:ProjectViewProjectNode" />
               <item name="0203" type="462c0819:PsiDirectoryNode" />
               <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="mysite" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="0203" type="b2602c69:ProjectViewProjectNode" />
-              <item name="0203" type="462c0819:PsiDirectoryNode" />
-              <item name="backend" type="462c0819:PsiDirectoryNode" />
-              <item name="mysite" type="462c0819:PsiDirectoryNode" />
-              <item name="pybo" type="462c0819:PsiDirectoryNode" />
+              <item name="static_root" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -399,7 +189,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../abc" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -436,11 +226,11 @@
     <editor active="true" />
     <layout>
       <window_info id="Favorites" side_tool="true" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24939272" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Python Console" />
-      <window_info anchor="bottom" id="Terminal" visible="true" weight="0.31850535" />
+      <window_info active="true" anchor="bottom" id="Terminal" visible="true" weight="0.31850535" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3291815" />
@@ -511,16 +301,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/mysite/config/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/mysite/manage.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -531,20 +311,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/backend/mysite/config/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="123" column="15" lean-forward="true" selection-start-line="123" selection-start-column="15" selection-end-line="123" selection-end-column="15" />
-          <folding>
-            <element signature="e#307#331#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/backend/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="1" selection-start-line="6" selection-start-column="1" selection-end-line="6" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/mysite/config/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-265">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/backend/mysite/config/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="109">
+          <caret line="134" column="22" lean-forward="true" selection-start-line="134" selection-start-column="22" selection-end-line="134" selection-end-column="22" />
+          <folding>
+            <element signature="e#307#331#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

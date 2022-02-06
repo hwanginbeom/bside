@@ -1,11 +1,15 @@
 #backend/post/views.py
-from django.http import JsonResponse
-from rest_framework import generics, viewsets
+
+from rest_framework import generics, viewsets, status
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from rest_framework.views import APIView
+from django.shortcuts import get_object_or_404
+#로그인 토큰
+from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+from rest_framework_jwt.serializers import VerifyJSONWebTokenSerializer
+
 
 from .models import *
 from .serializers import *
@@ -30,26 +34,24 @@ class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
 
-# class login(generics.GenericAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserloginSerializer
-#
-#     def post(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         user = serializer.data
-#         serializer.save()
-#         return Response(user)
-
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):
+    #유저 db 확인
+    serializer = UserchkSerializer(data=request.data, many=True)
+    serializer.is_valid()
+    if serializer.data[0]['email'] == 'None': #db에 정보 없을때 저장 진행
+        serializer = UsersaveSerializer(data=request.data, many=True)
+        if serializer.is_valid(raise_exception=True):
+            serializer.save()
+
     serializer = UserloginSerializer(data=request.data, many=True)
-    print(serializer)
-    # serializer.is_valid()
-    if serializer.is_valid(raise_exception=True):
-        serializer.save()
-        return Response(serializer.data)
+    serializer.is_valid()
+    response = {
+        'success': True,
+        'token': serializer.data[0]['token']
+    }
+    return Response(response, status=status.HTTP_200_OK)
 
 

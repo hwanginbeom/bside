@@ -47,7 +47,7 @@ INSTALLED_APPS = [
     'drf_yasg',  # 추가
     #로그인
     'rest_framework.authtoken',
-    'rest_framework_jwt',
+
 ]
 
 REST_FRAMEWORK = {

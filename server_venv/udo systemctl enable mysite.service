@@ -1,0 +1,17 @@
+[0;1;32m●[0m mysite.service - gunicorn daemon
+     Loaded: loaded (/etc/systemd/system/mysite.service; disabled; vendor preset: enabled)
+     Active: [0;1;32mactive (running)[0m since Sun 2022-02-06 15:57:02 KST; 5s ago
+   Main PID: 3883 (gunicorn)
+      Tasks: 3 (limit: 1108)
+     Memory: 68.3M
+     CGroup: /system.slice/mysite.service
+             ├─3883 /home/bside/server_venv/bin/python /home/bside/server_venv/bin/gunicorn --workers 2 --bind unix:/tmp/gunicorn.sock config.wsgi:application
+             ├─3894 /home/bside/server_venv/bin/python /home/bside/server_venv/bin/gunicorn --workers 2 --bind unix:/tmp/gunicorn.sock config.wsgi:application
+             └─3895 /home/bside/server_venv/bin/python /home/bside/server_venv/bin/gunicorn --workers 2 --bind unix:/tmp/gunicorn.sock config.wsgi:application
+
+Feb 06 15:57:02 bside systemd[1]: Started gunicorn daemon.
+Feb 06 15:57:02 bside gunicorn[3883]: [2022-02-06 15:57:02 +0900] [3883] [INFO] Starting gunicorn 20.1.0
+Feb 06 15:57:02 bside gunicorn[3883]: [2022-02-06 15:57:02 +0900] [3883] [INFO] Listening at: unix:/tmp/gunicorn.sock (3883)
+Feb 06 15:57:02 bside gunicorn[3883]: [2022-02-06 15:57:02 +0900] [3883] [INFO] Using worker: sync
+Feb 06 15:57:02 bside gunicorn[3894]: [2022-02-06 15:57:02 +0900] [3894] [INFO] Booting worker with pid: 3894
+Feb 06 15:57:02 bside gunicorn[3895]: [2022-02-06 15:57:02 +0900] [3895] [INFO] Booting worker with pid: 3895

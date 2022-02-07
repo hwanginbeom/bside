@@ -17,9 +17,9 @@
 
 2. 가상환경 접속
 
-     1.window os 환경 -> inbeom_venv\Scripts\activate
+     1.window os 환경 -> ????_venv\Scripts\activate
 
-     2.linux os 환경 -> source inbeom_venv\bin\activate  
+     2.linux os 환경 -> source ????_venv\bin\activate  
 
   
 
@@ -27,19 +27,19 @@
 
      정상적으로 가상환경에 접속될시 오른쪽과 같이 괄호안에 가상환경 이름이 나오게 됩니다. 그 후 라이브러리를 설치 하면 됩니다.
 
-     (inbeom_venv)bside> cd backend
+     (????_venv)bside> cd backend
 
-     (inbeom_venv)bside/backend> pip install -r requirements.txt
+     (????_venv)bside/backend> pip install -r requirements.txt
 
-     (inbeom_venv)bside/backend> pip install django-cors-headers
+     (????_venv)bside/backend> pip install django-cors-headers
 
    
 
 4. 서버 실행
 
-     (inbeom_venv)bside/backend>cd mysite
+     (????_venv)bside/backend>cd mysite
 
-     (inbeom_venv)bside/backend/mysite> python manage.py runserver
+     (????_venv)bside/backend/mysite> python manage.py runserver
 
    
 

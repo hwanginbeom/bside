@@ -10,6 +10,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
             'email',
             'password',
             'username',
@@ -120,7 +121,7 @@ class UserloginSerializer(serializers.Serializer):
                 'User with given username and password does not exist'
             )
 
-        return {'email': user.email, 'token': token}
+        return {'email': email, 'token': token}
 
 
 class UserupdateSerializer(serializers.ModelSerializer):

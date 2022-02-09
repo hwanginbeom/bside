@@ -43,12 +43,14 @@ def login(request):
 
     serializer = UserloginSerializer(data=request.data, many=True)
     serializer.is_valid()
-    print(serializer.data)
-    response = {
+    token = serializer.data[0]['token']
+    res = {
         'success': True,
-        'token': serializer.data[0]['token']
+        'token': token
     }
-    return Response(response, status=status.HTTP_200_OK)
+    response = Response(res, status=status.HTTP_200_OK)
+    response.set_cookie("token", token, 7)
+    return response
 
 
 # @permission_classes([AllowAny])

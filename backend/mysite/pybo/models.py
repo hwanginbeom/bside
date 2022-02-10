@@ -54,13 +54,13 @@ class Action(models.Model):
 #로그인 유저
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username=None, nickname=None, password=None, provider=None):
+    def create_user(self, email, name=None, nickname=None, password=None, provider=None):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
+            name=name,
             nickname=nickname,
             provider=provider,
         )
@@ -86,7 +86,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
-    username = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True)
     nickname = models.CharField(max_length=200, null=True)
     provider = models.CharField(max_length=200, null=True)
     last_login = models.DateTimeField(null=True)

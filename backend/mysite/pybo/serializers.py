@@ -13,7 +13,7 @@ class UserSerializer(serializers.ModelSerializer):
             'id',
             'email',
             'password',
-            'username',
+            'name',
             'nickname',
             'provider',
         )
@@ -64,12 +64,12 @@ class ActionSerializer(serializers.ModelSerializer):
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['password', 'email', 'username', 'img', 'provider']
+        fields = ['password', 'email', 'name', 'img', 'provider']
 
     def create(self, validated_data):
         user = User.objects.create(
             email=validated_data['email'],
-            username=validated_data['username'],
+            name=validated_data['name'],
             provider=validated_data['provider'],
             img=validated_data['img'],
         )
@@ -81,7 +81,8 @@ class UsersaveSerializer(serializers.ModelSerializer):
 class UserchkSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['email']
+        fields = ['email', 'name']
+    # email = serializers.CharField(max_length=200)
 
     def validate(self, data):
         email = data.get('email', None)
@@ -92,7 +93,6 @@ class UserchkSerializer(serializers.ModelSerializer):
             return {
                 'email': 'None'
             }
-        return {'email': user.email}
 
 
 # 유저 로그인 진행
@@ -105,6 +105,7 @@ JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
 class UserloginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     password = serializers.CharField(max_length=200, write_only=True)
+    name = serializers.CharField(max_length=200)
     token = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
@@ -121,15 +122,4 @@ class UserloginSerializer(serializers.Serializer):
                 'User with given username and password does not exist'
             )
 
-        return {'email': email, 'token': token}
-
-
-class UserupdateSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['nickname']
-
-    def update(self, instance, validated_data):
-        instance.nickname = validated_data('email', instance.nickname)
-        instance.save()
-        return instance
+        return {'token': token}

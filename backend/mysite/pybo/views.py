@@ -43,21 +43,9 @@ def login(request):
 
     serializer = UserloginSerializer(data=request.data, many=True)
     serializer.is_valid()
-    token = serializer.data[0]['token']
-    res = {
-        'success': True,
-        'token': token
-    }
+    token = serializer.validated_data[0]['token']
+    res = {'success': True}
     response = Response(res, status=status.HTTP_200_OK)
     response.set_cookie("token", token, 7)
     return response
 
-
-# @permission_classes([AllowAny])
-# class Userupdate(View):
-#     def post(self, request):
-#         serializer = UserupdateSerializer(data=request.data, many=True)
-#         if serializer.is_valid(raise_exception=True):
-#             serializer.save()
-#             print(serializer.data)
-#             return Response(status=status.HTTP_200_OK)

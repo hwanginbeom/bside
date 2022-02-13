@@ -45,17 +45,29 @@ class ActionViewSet(viewsets.ModelViewSet):
 def login(request):
     serializer = UserchkSerializer(data=request.data, many=True)
     serializer.is_valid()
-    if serializer.data[0]['email'] == 'None':
-        serializer = UsersaveSerializer(data=request.data, many=True)
-        if serializer.is_valid(raise_exception=True):
-            serializer.save()
-
-    serializer = UserloginSerializer(data=request.data, many=True)
-    serializer.is_valid()
-    token = serializer.validated_data[0]['token']
-    res = {'success': True}
-    response = Response(res, status=status.HTTP_200_OK)
-    response.set_cookie("token", token, 7)
-    return response
+    email = serializer.data[0]['email']
+    nickname = serializer.data[0]['nickname']
+    if email == 'None': # db 유저 데이터 없을때
+        if nickname == 'None': # 닉네임 데이터 안넘어 왔을때 db입력x
+            res = {'db': 'None'}
+            return Response(res, status=status.HTTP_200_OK)
+        else: # 닉네임 데이터 넘어왔을때 db입력o
+            serializer = UsersaveSerializer(data=request.data, many=True)
+            if serializer.is_valid(raise_exception=True):
+                serializer.save()
+            #db 저장후 토큰발급
+            serializer = UserloginSerializer(data=request.data, many=True)
+            serializer.is_valid()
+            token = serializer.validated_data[0]['token']
+            res = {'success': True, 'token': token}
+            response = Response(res, status=status.HTTP_200_OK)
+            return response
+    else: #db 유저 데이터 있을때 바로 token 발급
+        serializer = UserloginSerializer(data=request.data, many=True)
+        serializer.is_valid()
+        token = serializer.validated_data[0]['token']
+        res = {'success': True, 'token': token}
+        response = Response(res, status=status.HTTP_200_OK)
+        return response
 
 

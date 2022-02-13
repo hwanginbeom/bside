@@ -4,9 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="user_login_update">
       <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+=======
+    <list default="true" id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/0203.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/0203.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
+>>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +45,11 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -52,12 +68,16 @@
       </list>
     </option>
   </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="186" />
     <option name="y" value="-24" />
     <option name="width" value="1944" />
     <option name="height" value="1044" />
   </component>
+  <component name="ProjectId" id="253ZNNjKaXWfxs0L61CojMjTEFK" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -109,15 +129,27 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+<<<<<<< HEAD
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../abc" />
+=======
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+>>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hwang in beom\Desktop\bside\0203\backend\mysite\config\settings" />
     </key>
   </component>
+<<<<<<< HEAD
+=======
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
+>>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
   <component name="SvnConfiguration">
     <configuration />
   </component>

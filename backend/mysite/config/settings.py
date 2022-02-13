@@ -35,7 +35,7 @@ SECRET_KEY = 'w=8akg)9oz+fc%chr39z5zalhva&8kznpd0jn_$5ba5v7i!#)k'
 DEBUG = True
 
 ALLOWED_HOSTS = ["125.6.40.68"]
-#ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -89,7 +89,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = ['http://localhost:3000']
-
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'config.urls'
 

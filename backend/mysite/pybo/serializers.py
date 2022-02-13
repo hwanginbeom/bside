@@ -84,21 +84,24 @@ class UsersaveSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserchkSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = User
-        fields = ['email', 'name']
-    # email = serializers.CharField(max_length=200)
+class UserchkSerializer(serializers.Serializer):
+    email = serializers.CharField(max_length=200)
+    nickname = serializers.CharField(max_length=200, allow_null=True, required=False)
 
     def validate(self, data):
-        email = data.get('email', None)
-        # password = data.get('password', None)
+        email = data.get('email')
+        if data.get('nickname'):
+            nickname = data.get('nickname')
+        else:
+            nickname = 'None'
         user = authenticate(email=email)
-
         if user is None:
-            return {
-                'email': 'None'
-            }
+            return {'email': 'None', 'nickname': nickname}
+
+
+
+
+
 
 
 # 유저 로그인 진행
@@ -112,12 +115,15 @@ class UserloginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     password = serializers.CharField(max_length=200, write_only=True)
     name = serializers.CharField(max_length=200)
+    nickname = serializers.CharField(max_length=200)
     token = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
         email = data.get('email', None)
         password = data.get('password', None)
-        user = authenticate(email=email, password=password)
+        name = data.get('name', None)
+        nickname = data.get('nickname', None)
+        user = authenticate(email=email, password=password, name=name, nickname=nickname)
 
         try:
             payload = JWT_PAYLOAD_HANDLER(user)

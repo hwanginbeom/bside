@@ -11,4 +11,6 @@ router.register('action', views.ActionViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('login/', views.login),
 ]
+

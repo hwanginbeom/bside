@@ -54,14 +54,15 @@ class Action(models.Model):
 #로그인 유저
 
 class UserManager(BaseUserManager):
-    def create_user(self, email, username=None, nickname=None, password=None):
+    def create_user(self, email, name=None, nickname=None, password=None, provider=None):
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=self.normalize_email(email),
-            username=username,
+            name=name,
             nickname=nickname,
+            provider=provider,
         )
 
         user.set_password(password)
@@ -85,9 +86,11 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
-    username = models.CharField(max_length=200, null=True)
+    name = models.CharField(max_length=200, null=True)
     nickname = models.CharField(max_length=200, null=True)
     provider = models.CharField(max_length=200, null=True)
+    last_login = models.DateTimeField(null=True)
+    img = models.CharField(max_length=500, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -103,3 +106,4 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All superusers are staff
         return self.is_superuser
+

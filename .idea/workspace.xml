@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< HEAD
-    <list default="true" id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="user_login_update">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-    <list default="true" id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/0203.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/0203.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="login_update">
       <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
->>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,21 +123,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-<<<<<<< HEAD
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../abc" />
-=======
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
->>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hwang in beom\Desktop\bside\0203\backend\mysite\config\settings" />
     </key>
   </component>
-<<<<<<< HEAD
-=======
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="애플리케이션 수준" UseSingleDictionary="true" transferred="true" />
->>>>>>> d78455f094af2c8ea00853e9f961d10cfe7a3937
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -161,6 +142,14 @@
       <option name="presentableId" value="Default" />
       <updated>1643814216192</updated>
     </task>
+    <task id="LOCAL-00001" summary="login_update">
+      <created>1644775379161</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1644775379161</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -198,6 +187,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="login_update" />
+    <option name="LAST_COMMIT_MESSAGE" value="login_update" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/backend/mysite/pybo/serializers.py">

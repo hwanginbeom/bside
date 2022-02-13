@@ -70,12 +70,13 @@ class ActionSerializer(serializers.ModelSerializer):
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['password', 'email', 'name', 'img', 'provider']
+        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname']
 
     def create(self, validated_data):
         user = User.objects.create(
             email=validated_data['email'],
             name=validated_data['name'],
+            nickname=validated_data['nickname'],
             provider=validated_data['provider'],
             img=validated_data['img'],
         )
@@ -94,9 +95,15 @@ class UserchkSerializer(serializers.Serializer):
             nickname = data.get('nickname')
         else:
             nickname = 'None'
-        user = authenticate(email=email)
-        if user is None:
-            return {'email': 'None', 'nickname': nickname}
+
+        try:
+            user = User_auth.objects.get(email=email)
+        except User_auth.DoesNotExist:
+            user = 'None'
+
+        return {'email': user, 'nickname': nickname}
+
+
 
 
 

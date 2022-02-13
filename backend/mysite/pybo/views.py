@@ -40,6 +40,7 @@ class ActionViewSet(viewsets.ModelViewSet):
     filter_backends = [filters.SearchFilter]
     search_fields = ['agenda_id']
 
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def login(request):

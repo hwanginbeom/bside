@@ -1,7 +1,7 @@
 #backend/post/views.py
 from django.shortcuts import render
 from django.views import View
-from rest_framework import generics, viewsets, status
+from rest_framework import generics, viewsets, status, filters
 from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
@@ -11,25 +11,34 @@ from .models import *
 from .serializers import *
 
 
+# class UserViewSet(viewsets.ModelViewSet):
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
 
+
 class MeetViewSet(viewsets.ModelViewSet):
     queryset = Meet.objects.all()
     serializer_class = MeetSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['status']
 
 
 class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['meet_id']
 
 class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
-
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['agenda_id']
 
 @api_view(['POST'])
 @permission_classes([AllowAny])

@@ -10,20 +10,15 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
-            'id',
             'email',
             'password',
             'name',
             'nickname',
             'provider',
+            'last_login',
+            'img',
         )
-    email = models.CharField(max_length=200, unique=True)
-    password = models.CharField(max_length=200)
-    name = models.CharField(max_length=200, null=True)
-    nickname = models.CharField(max_length=200, null=True)
-    provider = models.CharField(max_length=200, null=True)
-    last_login = models.DateTimeField(null=True)
-    img = models.CharField(max_length=500, null=True)
+
 
 class MeetSerializer(serializers.ModelSerializer):
     class Meta:
@@ -33,7 +28,8 @@ class MeetSerializer(serializers.ModelSerializer):
             'meet_id',
             'meet_title',
             'meet_date',
-            'status',
+            'meet_status',
+            'rm_status',
             'participants',
             'goal',
             'last_time',
@@ -47,6 +43,7 @@ class AgendaSerializer(serializers.ModelSerializer):
             'meet_id',
             'agenda_id',
             'agenda_title',
+            'agenda_status',
             'discussion',
             'decisions',
             'setting_time',
@@ -66,17 +63,29 @@ class ActionSerializer(serializers.ModelSerializer):
         )
 
 
+class SelfCheckSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelfCheck
+        fields = (
+            'meet_id',
+            'check_id',
+            'ownership',
+            'participation',
+            'efficiency',
+            'productivity',
+        )
+
+
 # 유저 db저장
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname']
+        fields = ['password', 'email', 'name', 'img', 'provider']
 
     def create(self, validated_data):
         user = User.objects.create(
             email=validated_data['email'],
             name=validated_data['name'],
-            nickname=validated_data['nickname'],
             provider=validated_data['provider'],
             img=validated_data['img'],
         )
@@ -85,30 +94,21 @@ class UsersaveSerializer(serializers.ModelSerializer):
         return user
 
 
-class UserchkSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=200)
-    nickname = serializers.CharField(max_length=200, allow_null=True, required=False)
+class UserchkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ['email', 'name']
+    # email = serializers.CharField(max_length=200)
 
     def validate(self, data):
-        email = data.get('email')
-        if data.get('nickname'):
-            nickname = data.get('nickname')
-        else:
-            nickname = 'None'
+        email = data.get('email', None)
+        # password = data.get('password', None)
+        user = authenticate(email=email)
 
-        try:
-            user = User_auth.objects.get(email=email)
-        except User_auth.DoesNotExist:
-            user = 'None'
-
-        return {'email': user, 'nickname': nickname}
-
-
-
-
-
-
-
+        if user is None:
+            return {
+                'email': 'None'
+            }
 
 
 # 유저 로그인 진행
@@ -122,15 +122,12 @@ class UserloginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     password = serializers.CharField(max_length=200, write_only=True)
     name = serializers.CharField(max_length=200)
-    nickname = serializers.CharField(max_length=200)
     token = serializers.CharField(max_length=255, read_only=True)
 
     def validate(self, data):
         email = data.get('email', None)
         password = data.get('password', None)
-        name = data.get('name', None)
-        nickname = data.get('nickname', None)
-        user = authenticate(email=email, password=password, name=name, nickname=nickname)
+        user = authenticate(email=email, password=password)
 
         try:
             payload = JWT_PAYLOAD_HANDLER(user)

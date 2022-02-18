@@ -48,6 +48,7 @@ class AgendaSerializer(serializers.ModelSerializer):
             'decisions',
             'setting_time',
             'progress_time',
+            'order_number',
         )
 
 

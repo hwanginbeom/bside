@@ -1,64 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 
-
-class Meet(models.Model):
-    email = models.CharField(max_length=200)
-    meet_id = models.CharField(max_length=200)
-    meet_title = models.TextField()
-    meet_date = models.DateTimeField()
-    meet_status = models.CharField(max_length=200)
-    rm_status = models.CharField(max_length=200)
-    participants = models.TextField()
-    goal = models.TextField()
-    last_time = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.meet_id
-
-
-class Agenda(models.Model):
-    meet_id = models.CharField(max_length=200)
-    agenda_id = models.CharField(max_length=200)
-    agenda_title = models.TextField(default='')
-    agenda_status = models.CharField(max_length=200)
-    discussion = models.TextField(null=True)
-    decisions = models.TextField(null=True)
-    setting_time = models.IntegerField()
-    progress_time = models.IntegerField(null=True)
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.agenda_id
-
-
-class Action(models.Model):
-    agenda_id = models.CharField(max_length=200)
-    action_id = models.CharField(max_length=200)
-    action_title = models.TextField(null=True)
-    person = models.TextField(null=True)
-    dead_line = models.DateTimeField(null=True)
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.action_id
-
-
-class SelfCheck(models.Model):
-    meet_id = models.CharField(max_length=200)
-    check_id = models.CharField(max_length=200)
-    ownership = models.CharField(max_length=200)
-    participation = models.CharField(max_length=200)
-    efficiency = models.CharField(max_length=200)
-    productivity = models.CharField(max_length=200)
-
-    def __str__(self):
-        """A string representation of the model."""
-        return self.check_id
-
-
-
 #로그인 유저
 class UserManager(BaseUserManager):
     def create_user(self, email, name=None, nickname=None, password=None, provider=None):
@@ -90,6 +32,8 @@ class UserManager(BaseUserManager):
 
         return user
 
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     email = models.CharField(max_length=200, unique=True)
     password = models.CharField(max_length=200)
@@ -113,4 +57,63 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Is the user a member of staff?"
         # Simplest possible answer: All superusers are staff
         return self.is_superuser
+
+
+class Meet(models.Model):
+    email = models.ForeignKey('User', on_delete=models.CASCADE, db_column='email')
+    meet_id = models.AutoField(primary_key=True)
+    meet_title = models.TextField()
+    meet_date = models.DateTimeField()
+    meet_status = models.CharField(max_length=200)
+    rm_status = models.CharField(max_length=200)
+    participants = models.TextField()
+    goal = models.TextField()
+    last_time = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return str(self.meet_id)
+
+
+class Agenda(models.Model):
+    meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
+    agenda_id = models.AutoField(primary_key=True)
+    agenda_title = models.TextField(default='')
+    agenda_status = models.CharField(max_length=200)
+    discussion = models.TextField(null=True)
+    decisions = models.TextField(null=True)
+    setting_time = models.IntegerField()
+    progress_time = models.IntegerField(null=True)
+    order_number = models.IntegerField()
+
+    def __str__(self):
+        """A string representation of the model."""
+        return str(self.agenda_id)
+
+
+class Action(models.Model):
+    agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
+    action_id = models.AutoField(primary_key=True)
+    action_title = models.TextField(null=True)
+    person = models.TextField(null=True)
+    dead_line = models.DateTimeField(null=True)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return str(self.action_id)
+
+
+class SelfCheck(models.Model):
+    meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
+    check_id = models.AutoField(primary_key=True)
+    ownership = models.CharField(max_length=200)
+    participation = models.CharField(max_length=200)
+    efficiency = models.CharField(max_length=200)
+    productivity = models.CharField(max_length=200)
+
+    def __str__(self):
+        """A string representation of the model."""
+        return str(self.check_id)
+
+
 

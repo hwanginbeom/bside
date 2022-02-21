@@ -66,6 +66,19 @@ class ActionSerializer(serializers.ModelSerializer):
         )
 
 
+class SelfCheckSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = SelfCheck
+        fields = (
+            'meet_id',
+            'check_id',
+            'ownership',
+            'participation',
+            'efficiency',
+            'productivity',
+        )
+
+
 # 유저 db저장
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:

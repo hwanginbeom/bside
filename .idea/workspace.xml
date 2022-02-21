@@ -4,12 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a2ca84c8-a4cf-4ef8-a08a-fae0047c7fc9" name="변경" comment="login_update">
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/migrations/0001_initial.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/models.py" afterDir="false" />
+    <list default="true" id="a2ca84c8-a4cf-4ef8-a08a-fae0047c7fc9" name="변경" comment="ok">
       <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +149,21 @@
       <option name="project" value="LOCAL" />
       <updated>1644775379161</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="ok">
+      <created>1645423677102</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1645423677102</updated>
+    </task>
+    <task id="LOCAL-00003" summary="ok">
+      <created>1645423737996</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1645423737996</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -194,7 +204,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="login_update" />
-    <option name="LAST_COMMIT_MESSAGE" value="login_update" />
+    <MESSAGE value="ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="ok" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/backend/mysite/pybo/serializers.py">

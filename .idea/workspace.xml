@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="login_update">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -136,7 +141,7 @@
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e2955552-e3c7-4210-8780-f1d4d44a5500" name="Default Changelist" comment="" />
+      <changelist id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="login_update" />
       <created>1643814216192</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />

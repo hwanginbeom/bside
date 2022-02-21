@@ -42,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     provider = models.CharField(max_length=200, null=True)
     last_login = models.DateTimeField(null=True)
     img = models.CharField(max_length=500, null=True)
+    join_date = models.DateTimeField(null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -115,5 +116,13 @@ class SelfCheck(models.Model):
         """A string representation of the model."""
         return str(self.check_id)
 
+
+class Secession(models.Model):
+    email = models.CharField(max_length=200)
+    cause = models.CharField(max_length=500, null=True)
+    reg_date = models.DateTimeField(null=True)
+
+    def __str__(self):
+        return str(self.email)
 
 

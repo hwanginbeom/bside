@@ -1,8 +1,11 @@
 # backend/post/serializers.py
+from django.db.models import Q
+from django.utils.formats import date_format
 from rest_framework import serializers
 from django.contrib.auth.models import update_last_login
 from django.contrib.auth import authenticate, get_user_model
 from rest_framework_jwt.settings import api_settings
+from datetime import datetime, timedelta
 from .models import *
 
 
@@ -33,7 +36,8 @@ class MeetSerializer(serializers.ModelSerializer):
             'meet_id',
             'meet_title',
             'meet_date',
-            'status',
+            'meet_status',
+            'rm_status',
             'participants',
             'goal',
             'last_time',
@@ -78,12 +82,21 @@ class SelfCheckSerializer(serializers.ModelSerializer):
             'productivity',
         )
 
+class SecessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Secession
+        fields = (
+            'email',
+            'cause',
+            'reg_date',
+        )
+
 
 # 유저 db저장
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname']
+        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname', 'join_date']
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -92,6 +105,7 @@ class UsersaveSerializer(serializers.ModelSerializer):
             nickname=validated_data['nickname'],
             provider=validated_data['provider'],
             img=validated_data['img'],
+            join_date=datetime.now()
         )
         user.set_password(validated_data['password'])
         user.save()
@@ -101,6 +115,7 @@ class UsersaveSerializer(serializers.ModelSerializer):
 class UserchkSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     nickname = serializers.CharField(max_length=200, allow_null=True, required=False)
+    secession_email = serializers.CharField(max_length=200, allow_null=True, required=False)
 
     def validate(self, data):
         email = data.get('email')
@@ -114,7 +129,28 @@ class UserchkSerializer(serializers.Serializer):
         except User_auth.DoesNotExist:
             user = 'None'
 
-        return {'email': user, 'nickname': nickname}
+        if user == 'None':
+            try: #탈퇴하기 (탈퇴한날 부터 7일 계산)
+                secession_email = Secession.objects.filter(email=email).order_by('-reg_date')[0:1]
+                if secession_email[0].reg_date:
+                    start_date = secession_email[0].reg_date
+                    end_date = start_date + timedelta(days=7)
+                    try:
+                        Secession.objects.filter(Q(email=email) and Q(reg_date__range=[start_date, end_date])).order_by('-reg_date')[0:1]
+
+                        secession_email = 'True'
+                    except:
+                        secession_email = 'None'
+
+                else:
+                    secession_email = 'None'
+
+            except:
+                secession_email = 'None'
+        else:
+            secession_email = 'None'
+
+        return {'email': user, 'nickname': nickname, 'secession_email': secession_email}
 
 
 
@@ -125,6 +161,7 @@ User_auth = get_user_model()
 
 JWT_PAYLOAD_HANDLER = api_settings.JWT_PAYLOAD_HANDLER
 JWT_ENCODE_HANDLER = api_settings.JWT_ENCODE_HANDLER
+JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
 
 
 class UserloginSerializer(serializers.Serializer):
@@ -144,6 +181,7 @@ class UserloginSerializer(serializers.Serializer):
         try:
             payload = JWT_PAYLOAD_HANDLER(user)
             token = JWT_ENCODE_HANDLER(payload)
+
             update_last_login(None, user)
         except user.DoesNotExist:
             raise serializers.ValidationError(

@@ -74,6 +74,10 @@ class SelfChecksList(generics.ListAPIView):
         meet_id = self.kwargs['meet_id']
         return SelfCheck.objects.filter(meet_id=meet_id)
 
+class SecessionSerializer(viewsets.ModelViewSet):
+    queryset = Secession.objects.all()
+    serializer_class = SecessionSerializer
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -82,6 +86,11 @@ def login(request):
     serializer.is_valid()
     email = serializer.data[0]['email']
     nickname = serializer.data[0]['nickname']
+    secession_email = serializer.data[0]['secession_email']
+    if secession_email == 'True':
+        res = {'join': 'False'}
+        return Response(res, status=status.HTTP_200_OK)
+
     if email == 'None': # db 유저 데이터 없을때
         if nickname == 'None': # 닉네임 데이터 안넘어 왔을때 db입력x
             res = {'db': 'None'}

@@ -4,8 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="login_update">
-      <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
+    <list default="true" id="a2ca84c8-a4cf-4ef8-a08a-fae0047c7fc9" name="변경" comment="login_update">
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/migrations/0001_initial.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +39,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="kd/api" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

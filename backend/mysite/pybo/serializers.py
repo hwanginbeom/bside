@@ -138,17 +138,17 @@ class UserchkSerializer(serializers.Serializer):
 
                         secession_chk = 'True'
                     except:
-                        secession_email = 'None'
+                        secession_chk = 'None'
 
                 else:
-                    secession_email = 'None'
+                    secession_chk = 'None'
 
             except:
-                secession_email = 'None'
+                secession_chk = 'None'
         else:
-            secession_email = 'None'
+            secession_chk = 'None'
 
-        return {'email': user, 'nickname': nickname, 'secession_chk': secession_email}
+        return {'email': user, 'nickname': nickname, 'secession_chk': secession_chk}
 
 
 # 유저 로그인 진행

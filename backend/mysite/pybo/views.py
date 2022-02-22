@@ -2,8 +2,6 @@
 from django.shortcuts import render
 from django.views import View
 from rest_framework import generics, viewsets, status, filters
-# from django_filters import rest_framework as filters
-from django.shortcuts import render
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -11,10 +9,38 @@ from rest_framework.response import Response
 from .models import *
 from .serializers import *
 
+JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
+
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
+    def list(self, request, *args, **kwargs):
+        try:
+            header_token = request.META['HTTP_AUTHORIZATION']
+            token = JWT_DECODE_HANDLER(header_token)
+            token_user = User.objects.get(id=token['user_id'])
+            token_user = {
+                'email': token_user.email,
+                'name': token_user.name,
+                'nickname': token_user.nickname,
+                'provider': token_user.provider,
+                'img': token_user.img,
+                'last_login': token_user.last_login,
+                'join_date': token_user.join_date
+            }
+            print(token_user)
+            return Response(token_user, status=status.HTTP_200_OK)
+
+        except:
+            print(request.META['HTTP_AUTHORIZATION'])
+            token_user = {
+                'token': 'None'
+            }
+            return Response(token_user, status=status.HTTP_200_OK)
+
+
 
 
 class MeetViewSet(viewsets.ModelViewSet):
@@ -86,7 +112,6 @@ class SecessionSerializer(viewsets.ModelViewSet):
 def login(request):
     serializer = UserchkSerializer(data=request.data, many=True)
     serializer.is_valid()
-    print(serializer.data)
     email = serializer.data[0]['email']
     nickname = serializer.data[0]['nickname']
     secession_chk = serializer.data[0]['secession_chk']
@@ -112,6 +137,7 @@ def login(request):
     else: #db 유저 데이터 있을때 바로 token 발급
         serializer = UserloginSerializer(data=request.data, many=True)
         serializer.is_valid()
+        print(serializer.errors)
         token = serializer.validated_data[0]['token']
         res = {'success': True, 'token': token}
         response = Response(res, status=status.HTTP_200_OK)

@@ -86,11 +86,12 @@ class SecessionSerializer(viewsets.ModelViewSet):
 def login(request):
     serializer = UserchkSerializer(data=request.data, many=True)
     serializer.is_valid()
+    print(serializer.data)
     email = serializer.data[0]['email']
     nickname = serializer.data[0]['nickname']
     secession_chk = serializer.data[0]['secession_chk']
     if secession_chk == 'True':
-        res = {'join': 'False'}
+        res = {'success': 'False'}
         return Response(res, status=status.HTTP_200_OK)
 
     if email == 'None': # db 유저 데이터 없을때

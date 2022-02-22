@@ -113,7 +113,7 @@ class UsersaveSerializer(serializers.ModelSerializer):
 class UserchkSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
     nickname = serializers.CharField(max_length=200, allow_null=True, required=False)
-    secession_email = serializers.CharField(max_length=200, allow_null=True, required=False)
+    secession_chk = serializers.CharField(max_length=200, allow_null=True, required=False)
 
     def validate(self, data):
         email = data.get('email')

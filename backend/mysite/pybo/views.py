@@ -30,11 +30,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 'last_login': token_user.last_login,
                 'join_date': token_user.join_date
             }
-            print(token_user)
             return Response(token_user, status=status.HTTP_200_OK)
 
-        except:
-            print(request.META['HTTP_AUTHORIZATION'])
+        except KeyError:
             token_user = {
                 'token': 'None'
             }
@@ -137,7 +135,6 @@ def login(request):
     else: #db 유저 데이터 있을때 바로 token 발급
         serializer = UserloginSerializer(data=request.data, many=True)
         serializer.is_valid()
-        print(serializer.errors)
         token = serializer.validated_data[0]['token']
         res = {'success': True, 'token': token}
         response = Response(res, status=status.HTTP_200_OK)

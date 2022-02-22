@@ -161,10 +161,10 @@ JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
 
 class UserloginSerializer(serializers.Serializer):
     email = serializers.CharField(max_length=200)
-    password = serializers.CharField(max_length=200, write_only=True)
-    name = serializers.CharField(max_length=200)
-    nickname = serializers.CharField(max_length=200)
-    token = serializers.CharField(max_length=255, read_only=True)
+    password = serializers.CharField(max_length=200, write_only=True, required=False)
+    name = serializers.CharField(max_length=200, required=False)
+    nickname = serializers.CharField(max_length=200, required=False)
+    token = serializers.CharField(max_length=255, read_only=True, required=False)
 
     def validate(self, data):
         email = data.get('email', None)

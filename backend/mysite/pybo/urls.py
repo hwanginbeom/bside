@@ -14,7 +14,6 @@ router.register('secession', views.SecessionSerializer)
 
 urlpatterns = [
     path('', include(router.urls)),
-    path('login/', views.login),
     re_path('^meets/(?P<meet_status>.+)/$', views.MeetsList.as_view()),
     re_path('^meets/(?P<rm_status>.+)/$', views.MeetsList.as_view()),
     re_path('^agendas/(?P<meet_id>.+)/$', views.AgendasList.as_view()),

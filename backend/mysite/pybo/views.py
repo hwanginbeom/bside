@@ -1,8 +1,10 @@
-#backend/post/views.py
+# backend/post/views.py
+from typing import Dict
+
 from django.shortcuts import render
 from django.views import View
-from rest_framework import generics, viewsets, status, filters
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import generics, viewsets, status, filters, permissions
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
@@ -12,33 +14,77 @@ from .serializers import *
 JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
 
 
+#토큰 체크
+class TokenChk:
+    def __init__(self, request):
+        try:
+            header_token = request.META['HTTP_AUTHORIZATION']
+            token = JWT_DECODE_HANDLER(header_token)
+            self.request = token['user_id']
+        except:
+            self.request = 'None'
+
+    def chk(self):
+        return self.request
+
+
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
     def list(self, request, *args, **kwargs):
-        try:
-            header_token = request.META['HTTP_AUTHORIZATION']
-            token = JWT_DECODE_HANDLER(header_token)
-            token_user = User.objects.get(id=token['user_id'])
-            token_user = {
-                'email': token_user.email,
-                'name': token_user.name,
-                'nickname': token_user.nickname,
-                'provider': token_user.provider,
-                'img': token_user.img,
-                'last_login': token_user.last_login,
-                'join_date': token_user.join_date
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            user_info = User.objects.get(id=user_id)
+            user_info = {
+                'id': user_info.id,
+                'email': user_info.email,
+                'name': user_info.name,
+                'nickname': user_info.nickname,
+                'img': user_info.img,
+                'last_login': user_info.last_login,
+                'join_date': user_info.join_date,
+                'provider': user_info.provider,
             }
-            return Response(token_user, status=status.HTTP_200_OK)
 
-        except KeyError:
-            token_user = {
-                'token': 'None'
-            }
-            return Response(token_user, status=status.HTTP_200_OK)
+            return Response(user_info, status=status.HTTP_200_OK)
+        else:
+            user_info = {'success': False}
+            return Response(user_info, status=status.HTTP_200_OK)
 
+    @permission_classes([AllowAny])
+    def create(self, request, *args, **kwargs):
+        serializer = UserchkSerializer(data=request.data, many=True)
+        serializer.is_valid()
+        email = serializer.data[0]['email']
+        nickname = serializer.data[0]['nickname']
+        secession_chk = serializer.data[0]['secession_chk']
+        if secession_chk == 'True':
+            res = {'success': 'False'}
+            return Response(res, status=status.HTTP_200_OK)
 
+        if email == 'None':  # db 유저 데이터 없을때
+            if nickname == 'None':  # 닉네임 데이터 안넘어 왔을때 db입력x
+                res = {'db': 'None'}
+                return Response(res, status=status.HTTP_200_OK)
+            else:  # 닉네임 데이터 넘어왔을때 db입력o
+                serializer = UsersaveSerializer(data=request.data, many=True)
+                if serializer.is_valid(raise_exception=True):
+                    serializer.save()
+                # db 저장후 토큰발급
+                serializer = UserloginSerializer(data=request.data, many=True)
+                serializer.is_valid()
+                token = serializer.validated_data[0]['token']
+                res = {'success': True, 'token': token}
+                response = Response(res, status=status.HTTP_200_OK)
+                return response
+        else:  # db 유저 데이터 있을때 바로 token 발급
+            serializer = UserloginSerializer(data=request.data, many=True)
+            serializer.is_valid()
+            token = serializer.validated_data[0]['token']
+            res = {'success': True, 'token': token}
+            response = Response(res, status=status.HTTP_200_OK)
+            return response
 
 
 class MeetViewSet(viewsets.ModelViewSet):
@@ -59,6 +105,7 @@ class MeetsList(generics.ListAPIView):
         elif self.kwargs['rm_status'] is not None:
             rm_status = self.kwargs['rm_status']
             return Meet.objects.filter(rm_status=rm_status[-1]).order_by('meet_id')
+
 
 class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
@@ -103,41 +150,4 @@ class SelfChecksList(generics.ListAPIView):
 class SecessionSerializer(viewsets.ModelViewSet):
     queryset = Secession.objects.all()
     serializer_class = SecessionSerializer
-
-
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def login(request):
-    serializer = UserchkSerializer(data=request.data, many=True)
-    serializer.is_valid()
-    email = serializer.data[0]['email']
-    nickname = serializer.data[0]['nickname']
-    secession_chk = serializer.data[0]['secession_chk']
-    if secession_chk == 'True':
-        res = {'success': 'False'}
-        return Response(res, status=status.HTTP_200_OK)
-
-    if email == 'None': # db 유저 데이터 없을때
-        if nickname == 'None': # 닉네임 데이터 안넘어 왔을때 db입력x
-            res = {'db': 'None'}
-            return Response(res, status=status.HTTP_200_OK)
-        else: # 닉네임 데이터 넘어왔을때 db입력o
-            serializer = UsersaveSerializer(data=request.data, many=True)
-            if serializer.is_valid(raise_exception=True):
-                serializer.save()
-            #db 저장후 토큰발급
-            serializer = UserloginSerializer(data=request.data, many=True)
-            serializer.is_valid()
-            token = serializer.validated_data[0]['token']
-            res = {'success': True, 'token': token}
-            response = Response(res, status=status.HTTP_200_OK)
-            return response
-    else: #db 유저 데이터 있을때 바로 token 발급
-        serializer = UserloginSerializer(data=request.data, many=True)
-        serializer.is_valid()
-        token = serializer.validated_data[0]['token']
-        res = {'success': True, 'token': token}
-        response = Response(res, status=status.HTTP_200_OK)
-        return response
-
 

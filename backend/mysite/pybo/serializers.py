@@ -12,6 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = (
+            'id',
             'email',
             'password',
             'name',
@@ -132,7 +133,7 @@ class UserchkSerializer(serializers.Serializer):
                 secession_email = Secession.objects.filter(email=email).order_by('-reg_date')[0:1]
                 if secession_email[0].reg_date:
                     start_date = secession_email[0].reg_date
-                    end_date = start_date + timedelta(days=7)
+                    end_date = start_date + timedelta(days=1)
                     try:
                         Secession.objects.filter(Q(email=email) and Q(reg_date__range=[start_date, end_date])).order_by('-reg_date')[0:1]
 

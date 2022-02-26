@@ -32,6 +32,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    #get
     def list(self, request, *args, **kwargs):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
@@ -49,9 +50,9 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(user_info, status=status.HTTP_200_OK)
         else:
-            user_info = {'success': False}
-            return Response(user_info, status=status.HTTP_200_OK)
+            return Response({'success': False}, status=status.HTTP_200_OK)
 
+    #post(회원가입, 로그인)
     @permission_classes([AllowAny])
     def create(self, request, *args, **kwargs):
         serializer = UserchkSerializer(data=request.data, many=True)
@@ -85,6 +86,57 @@ class UserViewSet(viewsets.ModelViewSet):
             res = {'success': True, 'token': token}
             response = Response(res, status=status.HTTP_200_OK)
             return response
+
+    #update, delete
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            #user 정보 체크
+            try:
+                user_info = User.objects.get(id=user_id)
+            except:
+                return Response({'success': False}, status=status.HTTP_200_OK)
+
+            if request.method == 'PUT' or request.method == 'PATCH':
+                try:
+                    serializer = UserSerializer(instance=user_info, data=request.data)
+                    serializer.is_valid()
+                    serializer.save()
+                    user_info = {
+                        'id': user_info.id,
+                        'email': user_info.email,
+                        'name': user_info.name,
+                        'nickname': user_info.nickname,
+                        'img': user_info.img,
+                        'last_login': user_info.last_login,
+                        'join_date': user_info.join_date,
+                        'provider': user_info.provider,
+                    }
+                    return Response(user_info, status=status.HTTP_200_OK)
+                except:
+                    return Response({'success': False}, status=status.HTTP_200_OK)
+
+            elif request.method == 'DELETE':
+                user_info.delete()
+                user_info = {'success': True}
+                return Response(user_info, status=status.HTTP_200_OK)
+
+            else:
+                return Response({'success': False}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({'success': False}, status=status.HTTP_200_OK)
+
+    # --- 키값요청 메서드 종료처리
+    def update(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+    # ---
 
 
 class MeetViewSet(viewsets.ModelViewSet):
@@ -146,7 +198,6 @@ class SelfChecksList(generics.ListAPIView):
         return SelfCheck.objects.filter(meet_id=meet_id)
 
 
-@permission_classes([AllowAny])
 class SecessionSerializer(viewsets.ModelViewSet):
     queryset = Secession.objects.all()
     serializer_class = SecessionSerializer

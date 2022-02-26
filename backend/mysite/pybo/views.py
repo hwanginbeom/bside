@@ -1,4 +1,5 @@
 # backend/post/views.py
+import json
 from typing import Dict
 
 from django.shortcuts import render
@@ -102,16 +103,7 @@ class UserViewSet(viewsets.ModelViewSet):
                     serializer = UserSerializer(instance=user_info, data=request.data)
                     serializer.is_valid()
                     serializer.save()
-                    user_info = {
-                        'id': user_info.id,
-                        'email': user_info.email,
-                        'name': user_info.name,
-                        'nickname': user_info.nickname,
-                        'img': user_info.img,
-                        'last_login': user_info.last_login,
-                        'join_date': user_info.join_date,
-                        'provider': user_info.provider,
-                    }
+                    user_info = serializer.data
                     return Response(user_info, status=status.HTTP_200_OK)
                 except:
                     return Response({'success': False}, status=status.HTTP_200_OK)
@@ -144,6 +136,105 @@ class MeetViewSet(viewsets.ModelViewSet):
     serializer_class = MeetSerializer
     filter_backends = [filters.SearchFilter]
     search_fields = ['rm_status', 'meet_status']
+
+    #get
+    def list(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            if request.data:
+                try:
+                    meet_id = request.data['meet_id']
+                    meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id)
+                    serializer = MeetSerializer(meet_info, many=True)
+                    meet_info_list = serializer.data
+                    return Response(meet_info_list, status=status.HTTP_200_OK)
+                except:
+                    return Response({'success': False}, status=status.HTTP_200_OK)
+            else:
+                try:
+                    meet_info = Meet.objects.filter(user_id=user_id)
+                    serializer = MeetSerializer(meet_info, many=True)
+                    meet_info_list = serializer.data
+                    return Response(meet_info_list, status=status.HTTP_200_OK)
+                except:
+                    return Response({'success': False}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({'success': False}, status=status.HTTP_200_OK)
+
+    #post
+    def create(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            try:
+                meet_info = {
+                    "user_id": user_id,
+                    "meet_title": request.data['meet_title'],
+                    "meet_date": datetime.strptime(request.data['meet_date'], "%Y-%m-%d %H:%M:%S"),
+                    "meet_status": request.data['meet_status'],
+                    "rm_status": request.data['rm_status'],
+                    "participants": request.data['participants'],
+                    'goal': request.data['goal'],
+                }
+                serializer = MeetSerializer(data=meet_info)
+                serializer.is_valid()
+                serializer.save()
+
+                return Response({'success': True}, status=status.HTTP_200_OK)
+            except:
+                return Response({'success': False}, status=status.HTTP_200_OK)
+        else:
+            return Response({'success': False}, status=status.HTTP_200_OK)
+
+    #update, delete
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            if request.method == 'PUT' or request.method == 'PATCH':
+                try:
+                    meet_id = request.data['meet_id']
+                    meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
+                    # json 합치기
+                    meet_info_json = {'user_id': user_id}
+                    meet_info_json.update(request.data)
+                except:
+                    return Response({'success': False}, status=status.HTTP_200_OK)
+
+                serializer = MeetSerializer(instance=meet_info, data=meet_info_json)
+                serializer.is_valid()
+                serializer.save()
+
+                meet_info = serializer.data
+
+                return Response(meet_info, status=status.HTTP_200_OK)
+
+            elif request.method == 'DELETE':
+                if request.data:
+                    meet_id = request.data['meet_id']
+                    meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
+                    meet_info.delete()
+                    return Response({'success': True}, status=status.HTTP_200_OK)
+                else:
+                    meet_info = Meet.objects.filter(user_id=user_id)
+                    meet_info.delete()
+                    return Response({'success': True}, status=status.HTTP_200_OK)
+            else:
+                return Response({'success': False}, status=status.HTTP_200_OK)
+
+        else:
+            return Response({'success': False}, status=status.HTTP_200_OK)
+
+    # --- 키값요청 메서드 종료처리
+    def update(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+    # ---
 
 
 class MeetsList(generics.ListAPIView):

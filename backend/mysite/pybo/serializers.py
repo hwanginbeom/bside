@@ -28,7 +28,7 @@ class MeetSerializer(serializers.ModelSerializer):
     class Meta:
         model = Meet
         fields = (
-            'email',
+            'user_id',
             'meet_id',
             'meet_title',
             'meet_date',
@@ -95,7 +95,7 @@ class SecessionSerializer(serializers.ModelSerializer):
 class UsersaveSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname', 'join_date']
+        fields = ['password', 'email', 'name', 'img', 'provider', 'nickname']
 
     def create(self, validated_data):
         user = User.objects.create(
@@ -104,7 +104,6 @@ class UsersaveSerializer(serializers.ModelSerializer):
             nickname=validated_data['nickname'],
             provider=validated_data['provider'],
             img=validated_data['img'],
-            join_date=datetime.now()
         )
         user.set_password(validated_data['password'])
         user.save()

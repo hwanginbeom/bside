@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     provider = models.CharField(max_length=200, null=True)
     last_login = models.DateTimeField(null=True)
     img = models.CharField(max_length=500, null=True)
-    join_date = models.DateTimeField(null=True)
+    join_date = models.DateTimeField(auto_now=True, null=True)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
@@ -61,14 +61,14 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 
 class Meet(models.Model):
-    email = models.ForeignKey('User', on_delete=models.CASCADE, db_column='email')
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     meet_id = models.AutoField(primary_key=True)
-    meet_title = models.TextField()
-    meet_date = models.DateTimeField()
-    meet_status = models.CharField(max_length=200)
-    rm_status = models.CharField(max_length=200)
-    participants = models.TextField()
-    goal = models.TextField()
+    meet_title = models.TextField(null=True)
+    meet_date = models.DateTimeField(null=True)
+    meet_status = models.CharField(max_length=200, null=True)
+    rm_status = models.CharField(max_length=200, null=True)
+    participants = models.TextField(null=True)
+    goal = models.TextField(null=True)
     last_time = models.DateTimeField(auto_now=True)
 
     def __str__(self):

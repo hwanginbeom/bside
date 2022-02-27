@@ -107,6 +107,7 @@ class Action(models.Model):
 
 
 class SelfCheck(models.Model):
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     check_id = models.AutoField(primary_key=True)
     ownership = models.CharField(max_length=200)

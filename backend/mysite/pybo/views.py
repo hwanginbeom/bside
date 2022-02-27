@@ -142,13 +142,83 @@ class MeetViewSet(viewsets.ModelViewSet):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
             if request.data:
-                try:
+                if 'meet_id' in request.data and not'meet_status' in request.data and not'rm_status' in request.data: #meet_id(o), meet_status(x), rm_status(x)
                     meet_id = request.data['meet_id']
-                    meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id)
-                    serializer = MeetSerializer(meet_info, many=True)
-                    meet_info_list = serializer.data
-                    return Response(meet_info_list, status=status.HTTP_200_OK)
-                except:
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+
+                elif 'meet_id' in request.data and 'meet_status' in request.data and not'rm_status' in request.data: #meet_id(o), meet_status(o), rm_status(x)
+                    meet_id = request.data['meet_id']
+                    meet_status = request.data['meet_status']
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id, meet_status=meet_status)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+
+                elif 'meet_id' in request.data and 'meet_status' in request.data and 'rm_status' in request.data: #meet_id(o), meet_status(o), rm_status(o)
+                    meet_id = request.data['meet_id']
+                    meet_status = request.data['meet_status']
+                    rm_status = request.data['rm_status']
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id, meet_status=meet_status,
+                                                        rm_status=rm_status)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+
+                elif not'meet_id' in request.data and 'meet_status' in request.data and 'rm_status' in request.data: #meet_id(x), meet_status(o), rm_status(o)
+                    meet_status = request.data['meet_status']
+                    rm_status = request.data['rm_status']
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status, rm_status=rm_status)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+
+                elif not'meet_id' in request.data and 'meet_status' in request.data and not'rm_status' in request.data:  # meet_id(x), meet_status(o), rm_status(x)
+                    meet_status = request.data['meet_status']
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+
+                elif not'meet_id' in request.data and not'meet_status' in request.data and 'rm_status' in request.data:  # meet_id(x), meet_status(x), rm_status(o)
+                    rm_status = request.data['rm_status']
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id, rm_status=rm_status)
+                        serializer = MeetSerializer(meet_info, many=True)
+                        meet_info_list = serializer.data
+                        if not meet_info_list:
+                            meet_info_list = {"DATA": "None"}
+                        return Response(meet_info_list, status=status.HTTP_200_OK)
+                    except:
+                        return Response({'success': False}, status=status.HTTP_200_OK)
+                else:
                     return Response({'success': False}, status=status.HTTP_200_OK)
             else:
                 try:

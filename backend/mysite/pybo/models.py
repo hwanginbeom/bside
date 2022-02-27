@@ -77,6 +77,7 @@ class Meet(models.Model):
 
 
 class Agenda(models.Model):
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     agenda_id = models.AutoField(primary_key=True)
     agenda_title = models.TextField(default='')
@@ -93,6 +94,7 @@ class Agenda(models.Model):
 
 
 class Action(models.Model):
+    user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
     action_id = models.AutoField(primary_key=True)
     action_title = models.TextField(null=True)

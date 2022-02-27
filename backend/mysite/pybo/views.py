@@ -51,7 +51,11 @@ class UserViewSet(viewsets.ModelViewSet):
 
             return Response(user_info, status=status.HTTP_200_OK)
         else:
-            return Response({'success': False}, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     #post(회원가입, 로그인)
     @permission_classes([AllowAny])
@@ -62,8 +66,11 @@ class UserViewSet(viewsets.ModelViewSet):
         nickname = serializer.data[0]['nickname']
         secession_chk = serializer.data[0]['secession_chk']
         if secession_chk == 'True':
-            res = {'success': 'False'}
-            return Response(res, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'secession errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
         if email == 'None':  # db 유저 데이터 없을때
             if nickname == 'None':  # 닉네임 데이터 안넘어 왔을때 db입력x
@@ -96,7 +103,11 @@ class UserViewSet(viewsets.ModelViewSet):
             try:
                 user_info = User.objects.get(id=user_id)
             except:
-                return Response({'success': False}, status=status.HTTP_200_OK)
+                response_messages = {
+                    'success': False,
+                    'messages': 'user_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
             if request.method == 'PUT' or request.method == 'PATCH':
                 try:
@@ -106,7 +117,11 @@ class UserViewSet(viewsets.ModelViewSet):
                     user_info = serializer.data
                     return Response(user_info, status=status.HTTP_200_OK)
                 except:
-                    return Response({'success': False}, status=status.HTTP_200_OK)
+                    response_messages = {
+                        'success': False,
+                        'messages': 'user_update errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
 
             elif request.method == 'DELETE':
                 user_info.delete()
@@ -114,10 +129,18 @@ class UserViewSet(viewsets.ModelViewSet):
                 return Response(user_info, status=status.HTTP_200_OK)
 
             else:
-                return Response({'success': False}, status=status.HTTP_200_OK)
+                response_messages = {
+                    'success': False,
+                    'messages': 'user_delete errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
         else:
-            return Response({'success': False}, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     # --- 키값요청 메서드 종료처리
     def update(self, request, *args, **kwargs):
@@ -141,84 +164,34 @@ class MeetViewSet(viewsets.ModelViewSet):
     def list(self, request, *args, **kwargs):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
+            meet_where = Q(user_id=user_id)
             if request.data:
-                if 'meet_id' in request.data and not'meet_status' in request.data and not'rm_status' in request.data: #meet_id(o), meet_status(x), rm_status(x)
-                    meet_id = request.data['meet_id']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
+                if 'meet_id' in request.data:
+                    meet_where.add(Q(meet_id=request.data['meet_id']), meet_where.AND)
 
-                elif 'meet_id' in request.data and 'meet_status' in request.data and not'rm_status' in request.data: #meet_id(o), meet_status(o), rm_status(x)
-                    meet_id = request.data['meet_id']
-                    meet_status = request.data['meet_status']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id, meet_status=meet_status)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
+                if 'meet_status' in request.data:
+                    meet_where.add(Q(meet_status=request.data['meet_status']), meet_where.AND)
 
-                elif 'meet_id' in request.data and 'meet_status' in request.data and 'rm_status' in request.data: #meet_id(o), meet_status(o), rm_status(o)
-                    meet_id = request.data['meet_id']
-                    meet_status = request.data['meet_status']
-                    rm_status = request.data['rm_status']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id, meet_status=meet_status,
-                                                        rm_status=rm_status)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
-
-                elif not'meet_id' in request.data and 'meet_status' in request.data and 'rm_status' in request.data: #meet_id(x), meet_status(o), rm_status(o)
-                    meet_status = request.data['meet_status']
-                    rm_status = request.data['rm_status']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status, rm_status=rm_status)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
-
-                elif not'meet_id' in request.data and 'meet_status' in request.data and not'rm_status' in request.data:  # meet_id(x), meet_status(o), rm_status(x)
-                    meet_status = request.data['meet_status']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
-
-                elif not'meet_id' in request.data and not'meet_status' in request.data and 'rm_status' in request.data:  # meet_id(x), meet_status(x), rm_status(o)
-                    rm_status = request.data['rm_status']
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id, rm_status=rm_status)
-                        serializer = MeetSerializer(meet_info, many=True)
-                        meet_info_list = serializer.data
-                        return Response(meet_info_list, status=status.HTTP_200_OK)
-                    except:
-                        return Response({'success': False}, status=status.HTTP_200_OK)
-                else:
-                    return Response({'success': False}, status=status.HTTP_200_OK)
-            else:
-                try:
-                    meet_info = Meet.objects.filter(user_id=user_id)
-                    serializer = MeetSerializer(meet_info, many=True)
-                    meet_info_list = serializer.data
-                    return Response(meet_info_list, status=status.HTTP_200_OK)
-                except:
-                    return Response({'success': False}, status=status.HTTP_200_OK)
+                if 'rm_status' in request.data:
+                    meet_where.add(Q(rm_status=request.data['rm_status']), meet_where.AND)
+            try:
+                meet_info = Meet.objects.filter(meet_where)
+                serializer = MeetSerializer(meet_info, many=True)
+                meet_info_list = serializer.data
+                return Response(meet_info_list, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'meet_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
         else:
-            return Response({'success': False}, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     #post
     def create(self, request, *args, **kwargs):
@@ -240,9 +213,17 @@ class MeetViewSet(viewsets.ModelViewSet):
                 meet_save_info = serializer.data
                 return Response(meet_save_info, status=status.HTTP_200_OK)
             except:
-                return Response({'success': False}, status=status.HTTP_200_OK)
+                response_messages = {
+                    'success': False,
+                    'messages': 'meet_save errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
         else:
-            return Response({'success': False}, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     #update, delete
     def http_method_not_allowed(self, request, *args, **kwargs):
@@ -256,32 +237,58 @@ class MeetViewSet(viewsets.ModelViewSet):
                     # json 합치기
                     meet_info_json = {'user_id': user_id}
                     meet_info_json.update(request.data)
+
+                    serializer = MeetSerializer(instance=meet_info, data=meet_info_json)
+                    serializer.is_valid()
+                    serializer.save()
+
+                    meet_info = serializer.data
+
+                    return Response(meet_info, status=status.HTTP_200_OK)
                 except:
-                    return Response({'success': False}, status=status.HTTP_200_OK)
-
-                serializer = MeetSerializer(instance=meet_info, data=meet_info_json)
-                serializer.is_valid()
-                serializer.save()
-
-                meet_info = serializer.data
-
-                return Response(meet_info, status=status.HTTP_200_OK)
+                    response_messages = {
+                        'success': False,
+                        'messages': 'meet_update errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
 
             elif request.method == 'DELETE':
                 if request.data:
-                    meet_id = request.data['meet_id']
-                    meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
-                    meet_info.delete()
-                    return Response({'success': True}, status=status.HTTP_200_OK)
+                    try:
+                        meet_id = request.data['meet_id']
+                        meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
+                        meet_info.delete()
+                        return Response({'success': True}, status=status.HTTP_200_OK)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'meet_delete errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
                 else:
-                    meet_info = Meet.objects.filter(user_id=user_id)
-                    meet_info.delete()
-                    return Response({'success': True}, status=status.HTTP_200_OK)
+                    try:
+                        meet_info = Meet.objects.filter(user_id=user_id)
+                        meet_info.delete()
+                        return Response({'success': True}, status=status.HTTP_200_OK)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'meet_all_delete errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
             else:
-                return Response({'success': False}, status=status.HTTP_200_OK)
+                response_messages = {
+                    'success': False,
+                    'messages': 'method errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
         else:
-            return Response({'success': False}, status=status.HTTP_200_OK)
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     # --- 키값요청 메서드 종료처리
     def update(self, request, *args, **kwargs):
@@ -312,8 +319,199 @@ class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
 
-    # def list(self, request, *args, **kwargs):
+    def list(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            agenda_where = Q()
+            if request.data:
+                if 'meet_id' in request.data:
+                    agenda_where.add(Q(meet_id=request.data['meet_id']), agenda_where.AND)
 
+                if 'agenda_id' in request.data:
+                    agenda_where.add(Q(agenda_id=request.data['agenda_id']), agenda_where.AND)
+
+                if 'agenda_status' in request.data:
+                    agenda_where.add(Q(agenda_status=request.data['agenda_status']), agenda_where.AND)
+            try:
+                agenda_info = Agenda.objects.filter(agenda_where).select_related('meet_id').filter(meet_id__user_id=user_id).order_by('order_number')
+                serializer = AgendaSerializer(data=agenda_info, many=True)
+                serializer.is_valid()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'agenda_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def create(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            if isinstance(request.data, list):
+                response_array = []
+                for i in request.data:
+                    try:
+                        Meet.objects.get(user_id=user_id, meet_id=i['meet_id']) #유저의 meet_id인지 체크
+
+                        serializer = AgendaSerializer(data=i)
+                        serializer.is_valid()
+                        serializer.save()
+                        response_array.append(serializer.data)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'agenda_array_save errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+                return Response(response_array, status=status.HTTP_200_OK)
+
+            else:
+                try:
+                    Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
+
+                    serializer = AgendaSerializer(data=request.data)
+                    serializer.is_valid()
+                    serializer.save()
+                    agenda_info = serializer.data
+                except:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'agenda_save errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+                return Response(agenda_info, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            if request.method == 'PUT' or request.method == 'PATCH':
+                if isinstance(request.data, list):
+                    response_array = []
+                    for i in request.data:
+                        try:
+                            meet_id = Meet.objects.get(user_id=user_id, meet_id=i['meet_id']) # 유저의 meet_id인지 체크
+
+                            agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], meet_id=meet_id.meet_id)
+                            serializer = AgendaSerializer(instance=agenda_info, data=i)
+                            serializer.is_valid()
+                            serializer.save()
+                            response_array.append(serializer.data)
+                        except:
+                            response_messages = {
+                                'success': False,
+                                'messages': 'agenda_array_update errors'
+                            }
+                            return Response(response_messages, status=status.HTTP_200_OK)
+
+                    return Response(response_array, status=status.HTTP_200_OK)
+
+                else:
+                    try:
+                        meet_id = Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
+
+                        agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=request.data['agenda_id'], meet_id=meet_id.meet_id)
+                        serializer = AgendaSerializer(instance=agenda_info, data=request.data)
+                        serializer.is_valid()
+                        serializer.save()
+
+                        return Response(serializer.data, status=status.HTTP_200_OK)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'agenda_update errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+            elif request.method == 'DELETE':
+                if isinstance(request.data, list):
+                    for i in request.data:
+                        try:
+                            meet_id = Meet.objects.get(user_id=user_id, meet_id=i['meet_id'])  # 유저의 meet_id인지 체크
+
+                            if not'agenda_id' in i:
+                                response_messages = {
+                                    'success': False,
+                                    'messages': 'agenda_delete_key errors'
+                                }
+                                return Response(response_messages, status=status.HTTP_200_OK)
+
+                            agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], meet_id=meet_id.meet_id)
+                            agenda_info.delete()
+
+                        except:
+                            response_messages = {
+                                'success': False,
+                                'messages': 'agenda_array_delete errors'
+                            }
+                            return Response(response_messages, status=status.HTTP_200_OK)
+
+                    response_messages = {
+                        'success': True
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+                else:
+                    try:
+                        meet_id = Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
+                        meet_where = Q(meet_id=meet_id.meet_id)
+
+                        if 'agenda_id' in request.data:
+                            meet_where.add(Q(agenda_id=request.data['agenda_id']), meet_where.AND)
+
+                        agenda_info = Agenda.objects.filter(meet_where).select_related('meet_id').filter(meet_id__user_id=user_id)
+                        agenda_info.delete()
+
+                        response_messages = {
+                            'success': True
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'agenda_delete errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+            else:
+                response_messages = {
+                    'success': False,
+                    'messages': 'method errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    # --- 키값요청 메서드 종료처리
+    def update(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+    # ---
 
 
 class AgendasList(generics.ListAPIView):

@@ -148,8 +148,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                         meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -161,8 +159,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                         meet_info = Meet.objects.filter(user_id=user_id, meet_id=meet_id, meet_status=meet_status)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -176,8 +172,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                                                         rm_status=rm_status)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -189,8 +183,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                         meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status, rm_status=rm_status)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -201,8 +193,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                         meet_info = Meet.objects.filter(user_id=user_id, meet_status=meet_status)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -213,8 +203,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                         meet_info = Meet.objects.filter(user_id=user_id, rm_status=rm_status)
                         serializer = MeetSerializer(meet_info, many=True)
                         meet_info_list = serializer.data
-                        if not meet_info_list:
-                            meet_info_list = {"DATA": "None"}
                         return Response(meet_info_list, status=status.HTTP_200_OK)
                     except:
                         return Response({'success': False}, status=status.HTTP_200_OK)
@@ -249,8 +237,8 @@ class MeetViewSet(viewsets.ModelViewSet):
                 serializer = MeetSerializer(data=meet_info)
                 serializer.is_valid()
                 serializer.save()
-
-                return Response({'success': True}, status=status.HTTP_200_OK)
+                meet_save_info = serializer.data
+                return Response(meet_save_info, status=status.HTTP_200_OK)
             except:
                 return Response({'success': False}, status=status.HTTP_200_OK)
         else:
@@ -323,6 +311,9 @@ class MeetsList(generics.ListAPIView):
 class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
+
+    # def list(self, request, *args, **kwargs):
+
 
 
 class AgendasList(generics.ListAPIView):

@@ -462,7 +462,8 @@ class AgendaViewSet(viewsets.ModelViewSet):
                             return Response(response_messages, status=status.HTTP_200_OK)
 
                     response_messages = {
-                        'success': True
+                        'success': True,
+                        'messages': 'agenda_array_delete success'
                     }
                     return Response(response_messages, status=status.HTTP_200_OK)
 
@@ -478,7 +479,8 @@ class AgendaViewSet(viewsets.ModelViewSet):
                         agenda_info.delete()
 
                         response_messages = {
-                            'success': True
+                            'success': True,
+                            'messages': 'agenda_delete success'
                         }
                         return Response(response_messages, status=status.HTTP_200_OK)
 
@@ -525,6 +527,199 @@ class AgendasList(generics.ListAPIView):
 class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
+
+    def list(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            action_where = Q()
+            if request.data:
+                if 'agenda_id' in request.data:
+                    action_where.add(Q(agenda_id=request.data['agenda_id']), action_where.AND)
+            try:
+                action_info = Action.objects.filter(action_where).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+                serializer = ActionSerializer(data=action_info, many=True)
+                serializer.is_valid()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'action_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def create(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            if isinstance(request.data, list):
+                response_array = []
+                for i in request.data:
+                    try:
+                        # 해당 유저의 agenda_id 맞는지 체크
+                        Action.objects.filter(agenda_id=i['agenda_id']).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+
+                        serializer = ActionSerializer(data=i)
+                        serializer.is_valid()
+                        serializer.save()
+
+                        response_array.append(serializer.data)
+
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'action_array_save errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+                return Response(response_array, status=status.HTTP_200_OK)
+
+            else:
+                try:
+                    # 해당 유저의 agenda_id 맞는지 체크
+                    Action.objects.filter(agenda_id=request.data['agenda_id']).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+
+                    serializer = ActionSerializer(data=request.data)
+                    serializer.is_valid()
+                    serializer.save()
+
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+
+                except:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'action_save errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            if request.method == 'PUT' or request.method == 'PATCH':
+                if isinstance(request.data, list):
+                    response_array = []
+                    for i in request.data:
+                        try:
+                            # 해당 유저의 agenda_id 맞는지 체크
+                            action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id')\
+                                .filter(agenda_id__meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], action_id=i['action_id'])
+
+                            serializer = ActionSerializer(instance=action_info, data=i)
+                            serializer.is_valid()
+                            serializer.save()
+
+                            response_array.append(serializer.data)
+                        except:
+                            response_messages = {
+                                'success': False,
+                                'messages': 'action_array_update errors'
+                            }
+                            return Response(response_messages, status=status.HTTP_200_OK)
+
+                    return Response(response_array, status=status.HTTP_200_OK)
+                else:
+                    try:
+                        # 해당 유저의 agenda_id 맞는지 체크
+                        action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id') \
+                            .filter(agenda_id__meet_id__user_id=user_id).get(agenda_id=request.data['agenda_id'], action_id=request.data['action_id'])
+
+                        serializer = ActionSerializer(instance=action_info, data=request.data)
+                        serializer.is_valid()
+                        serializer.save()
+
+                        return Response(serializer.data, status=status.HTTP_200_OK)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'action_update errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+            elif request.method == 'DELETE':
+                if isinstance(request.data, list):
+                    for i in request.data:
+                        try:
+                            # 해당 유저의 agenda_id 맞는지 체크
+                            action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id') \
+                                .filter(agenda_id__meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], action_id=i['action_id'])
+
+                            action_info.delete()
+
+                        except:
+                            response_messages = {
+                                'success': False,
+                                'messages': 'action_array_delete errors'
+                            }
+                            return Response(response_messages, status=status.HTTP_200_OK)
+
+                    response_messages = {
+                        'success': True,
+                        'messages': 'action_array_delete success'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+                else:
+                    try:
+                        action_where = Q(Q(agenda_id=request.data['agenda_id']))
+
+                        if 'action_id' in request.data:
+                            action_where.add(Q(action_id=request.data['action_id']), action_where.AND)
+
+                        # 해당 유저의 agenda_id 맞는지 체크
+                        action_info = Action.objects.filter(action_where).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+
+                        action_info.delete()
+
+                        response_messages = {
+                            'success': True,
+                            'messages': 'action_delete success'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+                    except:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'action_delete errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
+            else:
+                response_messages = {
+                    'success': False,
+                    'messages': 'method errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    # --- 키값요청 메서드 종료처리
+    def update(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+    # ---
 
 
 class ActionsList(generics.ListAPIView):

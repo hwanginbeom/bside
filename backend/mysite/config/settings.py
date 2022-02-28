@@ -34,8 +34,8 @@ SECRET_KEY = 'w=8akg)9oz+fc%chr39z5zalhva&8kznpd0jn_$5ba5v7i!#)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["125.6.40.68"]
-# ALLOWED_HOSTS = ['*']
+# ALLOWED_HOSTS = ["125.6.40.68",]
+ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -57,7 +57,7 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-    #로그인
+    # 로그인
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
         'rest_framework.renderers.BrowsableAPIRenderer',
@@ -67,10 +67,10 @@ REST_FRAMEWORK = {
     ),
 }
 
-#로그인
+# 로그인
 JWT_AUTH = {
     'JWT_SECRET_KEY': SECRET_KEY,
-    'JWT_ALGORITHM': 'HS256', #암호화 알고리즘
+    'JWT_ALGORITHM': 'HS256',  # 암호화 알고리즘
     'JWT_ALLOW_REFRESH': False,
     'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),
     # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),
@@ -129,14 +129,14 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 DATABASES = {
-	'default': {
-    	'ENGINE': 'django.db.backends.mysql',
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bside',
         'USER': 'root',
-        'PASSWORD': '', #대영
+        'PASSWORD': '',  # 대영
         'HOST': 'localhost',
         'PORT': '3306',
-     }
+    }
 }
 
 LANGUAGE_CODE = 'ko-kr'
@@ -159,4 +159,3 @@ USE_TZ = True
 
 
 AUTH_USER_MODEL = 'pybo.User'
-

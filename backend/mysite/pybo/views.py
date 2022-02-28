@@ -229,6 +229,7 @@ class MeetViewSet(viewsets.ModelViewSet):
                 }
                 serializer = MeetSerializer(data=meet_info)
                 serializer.is_valid()
+                print(meet_info)
                 serializer.save()
                 meet_save_info = serializer.data
                 return Response(meet_save_info, status=status.HTTP_200_OK)

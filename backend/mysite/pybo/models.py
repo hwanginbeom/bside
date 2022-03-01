@@ -81,8 +81,8 @@ class Agenda(models.Model):
     agenda_id = models.AutoField(primary_key=True)
     agenda_title = models.TextField(default='')
     agenda_status = models.CharField(max_length=200)
-    discussion = models.TextField(default='', null=True)
-    decisions = models.TextField(default='', null=True)
+    discussion = models.TextField(blank=True, null=True)
+    decisions = models.TextField(blank=True, null=True)
     setting_time = models.IntegerField()
     progress_time = models.IntegerField(null=True)
     order_number = models.IntegerField()
@@ -95,8 +95,8 @@ class Agenda(models.Model):
 class Action(models.Model):
     agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
     action_id = models.AutoField(primary_key=True)
-    action_title = models.TextField(default='', null=True)
-    person = models.TextField(default='', null=True)
+    action_title = models.TextField(blank=True, null=True)
+    person = models.TextField(blank=True, null=True)
     dead_line = models.DateTimeField(null=True)
 
     def __str__(self):

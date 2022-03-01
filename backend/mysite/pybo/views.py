@@ -157,23 +157,22 @@ class UserViewSet(viewsets.ModelViewSet):
 class MeetViewSet(viewsets.ModelViewSet):
     queryset = Meet.objects.all()
     serializer_class = MeetSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['rm_status', 'meet_status']
 
     #get
     def list(self, request, *args, **kwargs):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
             meet_where = Q(user_id=user_id)
-            if request.data:
-                if 'meet_id' in request.data:
-                    meet_where.add(Q(meet_id=request.data['meet_id']), meet_where.AND)
+            if request.GET:
+                if 'meet_id' in request.GET:
+                    meet_where.add(Q(meet_id=request.GET['meet_id']), meet_where.AND)
 
-                if 'meet_status' in request.data:
-                    meet_where.add(Q(meet_status=request.data['meet_status']), meet_where.AND)
+                if 'meet_status' in request.GET:
+                    meet_where.add(Q(meet_status=request.GET['meet_status']), meet_where.AND)
 
-                if 'rm_status' in request.data:
-                    meet_where.add(Q(rm_status=request.data['rm_status']), meet_where.AND)
+                if 'rm_status' in request.GET:
+                    meet_where.add(Q(rm_status=request.GET['rm_status']), meet_where.AND)
+
             try:
                 meet_info = Meet.objects.filter(meet_where)
                 serializer = MeetSerializer(meet_info, many=True)
@@ -255,10 +254,34 @@ class MeetViewSet(viewsets.ModelViewSet):
             elif request.method == 'DELETE':
                 if request.data:
                     try:
+                        response_messages = {
+                            'success': True,
+                            'meet': 'delete ok'
+                        }
+
                         meet_id = request.data['meet_id']
                         meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
+
+                        try:
+                            agenda_info = Agenda.objects.filter(meet_id=meet_info.meet_id)
+                            print(agenda_info)
+                            agenda_info.delete()
+
+                            response_messages.update({'agenda': 'delete ok'})
+                        except:
+                            response_messages.update({'agenda': 'None'})
+
+                        try:
+                            action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_info.meet_id)
+                            action_info.delete()
+
+                            response_messages.update({'action': 'delete ok'})
+                        except:
+                            response_messages.update({'action': 'None'})
+
                         meet_info.delete()
-                        return Response({'success': True}, status=status.HTTP_200_OK)
+
+                        return Response(response_messages, status=status.HTTP_200_OK)
                     except:
                         response_messages = {
                             'success': False,
@@ -302,17 +325,17 @@ class MeetViewSet(viewsets.ModelViewSet):
     # ---
 
 
-class MeetsList(generics.ListAPIView):
-    serializer_class = MeetSerializer
-    print('됨?')
-
-    def get_queryset(self):
-        if self.kwargs['meet_status'] is not None:
-            meet_status = self.kwargs['meet_status']
-            return Meet.objects.filter(meet_status=meet_status[-1]).order_by('meet_id')
-        elif self.kwargs['rm_status'] is not None:
-            rm_status = self.kwargs['rm_status']
-            return Meet.objects.filter(rm_status=rm_status[-1]).order_by('meet_id')
+# class MeetsList(generics.ListAPIView):
+#     serializer_class = MeetSerializer
+#     print('됨?')
+#
+#     def get_queryset(self):
+#         if self.kwargs['meet_status'] is not None:
+#             meet_status = self.kwargs['meet_status']
+#             return Meet.objects.filter(meet_status=meet_status[-1]).order_by('meet_id')
+#         elif self.kwargs['rm_status'] is not None:
+#             rm_status = self.kwargs['rm_status']
+#             return Meet.objects.filter(rm_status=rm_status[-1]).order_by('meet_id')
 
 
 class AgendaViewSet(viewsets.ModelViewSet):
@@ -323,15 +346,15 @@ class AgendaViewSet(viewsets.ModelViewSet):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
             agenda_where = Q()
-            if request.data:
-                if 'meet_id' in request.data:
-                    agenda_where.add(Q(meet_id=request.data['meet_id']), agenda_where.AND)
+            if request.GET:
+                if 'meet_id' in request.GET:
+                    agenda_where.add(Q(meet_id=request.GET['meet_id']), agenda_where.AND)
 
-                if 'agenda_id' in request.data:
-                    agenda_where.add(Q(agenda_id=request.data['agenda_id']), agenda_where.AND)
+                if 'agenda_id' in request.GET:
+                    agenda_where.add(Q(agenda_id=request.GET['agenda_id']), agenda_where.AND)
 
-                if 'agenda_status' in request.data:
-                    agenda_where.add(Q(agenda_status=request.data['agenda_status']), agenda_where.AND)
+                if 'agenda_status' in request.GET:
+                    agenda_where.add(Q(agenda_status=request.GET['agenda_status']), agenda_where.AND)
             try:
                 agenda_info = Agenda.objects.filter(agenda_where).select_related('meet_id').filter(meet_id__user_id=user_id).order_by('order_number')
                 serializer = AgendaSerializer(data=agenda_info, many=True)
@@ -440,8 +463,13 @@ class AgendaViewSet(viewsets.ModelViewSet):
 
             elif request.method == 'DELETE':
                 if isinstance(request.data, list):
+                    response_messages = {
+                        'success': True,
+                        'agenda': 'delete ok'
+                    }
                     for i in request.data:
                         try:
+
                             meet_id = Meet.objects.get(user_id=user_id, meet_id=i['meet_id'])  # 유저의 meet_id인지 체크
 
                             if not'agenda_id' in i:
@@ -452,6 +480,15 @@ class AgendaViewSet(viewsets.ModelViewSet):
                                 return Response(response_messages, status=status.HTTP_200_OK)
 
                             agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], meet_id=meet_id.meet_id)
+
+                            try:
+                                action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
+                                action_info.delete()
+
+                                response_messages.update({'action': 'delete ok'})
+                            except:
+                                response_messages.update({'action': 'None'})
+
                             agenda_info.delete()
 
                         except:
@@ -461,14 +498,15 @@ class AgendaViewSet(viewsets.ModelViewSet):
                             }
                             return Response(response_messages, status=status.HTTP_200_OK)
 
-                    response_messages = {
-                        'success': True,
-                        'messages': 'agenda_array_delete success'
-                    }
                     return Response(response_messages, status=status.HTTP_200_OK)
 
                 else:
                     try:
+                        response_messages = {
+                            'success': True,
+                            'agenda': 'delete ok'
+                        }
+
                         meet_id = Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
                         meet_where = Q(meet_id=meet_id.meet_id)
 
@@ -478,10 +516,14 @@ class AgendaViewSet(viewsets.ModelViewSet):
                         agenda_info = Agenda.objects.filter(meet_where).select_related('meet_id').filter(meet_id__user_id=user_id)
                         agenda_info.delete()
 
-                        response_messages = {
-                            'success': True,
-                            'messages': 'agenda_delete success'
-                        }
+                        try:
+                            action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
+                            action_info.delete()
+
+                            response_messages.update({'action': 'delete ok'})
+                        except:
+                            response_messages.update({'action': 'None'})
+
                         return Response(response_messages, status=status.HTTP_200_OK)
 
                     except:
@@ -516,12 +558,13 @@ class AgendaViewSet(viewsets.ModelViewSet):
     # ---
 
 
-class AgendasList(generics.ListAPIView):
-    serializer_class = AgendaSerializer
-
-    def get_queryset(self):
-        meet_id = self.kwargs['meet_id']
-        return Agenda.objects.filter(meet_id=meet_id).order_by('order_number')
+# class AgendasList(generics.ListAPIView):
+#     serializer_class = AgendaSerializer
+#
+#     def get_queryset(self):
+#         meet_id = self.kwargs['meet_id']
+#         print(meet_id)
+#         return Agenda.objects.filter(meet_id=meet_id).order_by('order_number')
 
 
 class ActionViewSet(viewsets.ModelViewSet):
@@ -532,11 +575,16 @@ class ActionViewSet(viewsets.ModelViewSet):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
             action_where = Q()
-            if request.data:
-                if 'agenda_id' in request.data:
-                    action_where.add(Q(agenda_id=request.data['agenda_id']), action_where.AND)
+            if request.GET:
+                if 'agenda_id' in request.GET:
+                    action_where.add(Q(agenda_id=request.GET['agenda_id']), action_where.AND)
+
+                if 'action_id' in request.GET:
+                    action_where.add(Q(action_id=request.GET['action_id']), action_where.AND)
+
             try:
                 action_info = Action.objects.filter(action_where).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+
                 serializer = ActionSerializer(data=action_info, many=True)
                 serializer.is_valid()
                 return Response(serializer.data, status=status.HTTP_200_OK)
@@ -558,7 +606,6 @@ class ActionViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
-
             if isinstance(request.data, list):
                 response_array = []
                 for i in request.data:
@@ -668,7 +715,7 @@ class ActionViewSet(viewsets.ModelViewSet):
 
                     response_messages = {
                         'success': True,
-                        'messages': 'action_array_delete success'
+                        'action': 'delete ok'
                     }
                     return Response(response_messages, status=status.HTTP_200_OK)
 
@@ -686,7 +733,7 @@ class ActionViewSet(viewsets.ModelViewSet):
 
                         response_messages = {
                             'success': True,
-                            'messages': 'action_delete success'
+                            'action': 'delete ok'
                         }
                         return Response(response_messages, status=status.HTTP_200_OK)
                     except:
@@ -722,28 +769,65 @@ class ActionViewSet(viewsets.ModelViewSet):
     # ---
 
 
-class ActionsList(generics.ListAPIView):
-    serializer_class = ActionSerializer
-
-    def get_queryset(self):
-        agenda_id = self.kwargs['agenda_id']
-        return Action.objects.filter(agenda_id=agenda_id)
+# class ActionsList(generics.ListAPIView):
+#     serializer_class = ActionSerializer
+#
+#     def get_queryset(self):
+#         agenda_id = self.kwargs['agenda_id']
+#         return Action.objects.filter(agenda_id=agenda_id)
 
 
 class SelfCheckViewSet(viewsets.ModelViewSet):
     queryset = SelfCheck.objects.all()
     serializer_class = SelfCheckSerializer
 
+    def list(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            selfcheck_where = Q()
 
-class SelfChecksList(generics.ListAPIView):
-    serializer_class = SelfCheckSerializer
+            if request.GET:
+                if 'meet_id' in request.GET:
+                    selfcheck_where.add(Q(meet_id=request.GET['meet_id']), selfcheck_where.AND)
 
-    def get_queryset(self):
-        meet_id = self.kwargs['meet_id']
-        return SelfCheck.objects.filter(meet_id=meet_id)
+                if 'check_id' in request.GET:
+                    selfcheck_where.add(Q(check_id=request.GET['check_id']), selfcheck_where.AND)
+            try:
+
+                selfcheck_info = SelfCheck.objects.filter(selfcheck_where).select_related('meet_id').filter(meet_id__user_id=user_id)
+
+                serializer = SelfCheckSerializer(data=selfcheck_info, many=True)
+                serializer.is_valid()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'selfcheck_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    # def create(self, request, *args, **kwargs):
+
+
+
+# class SelfChecksList(generics.ListAPIView):
+#     serializer_class = SelfCheckSerializer
+#
+#     def get_queryset(self):
+#         meet_id = self.kwargs['meet_id']
+#         return SelfCheck.objects.filter(meet_id=meet_id)
 
 
 class SecessionSerializer(viewsets.ModelViewSet):
     queryset = Secession.objects.all()
     serializer_class = SecessionSerializer
+
 

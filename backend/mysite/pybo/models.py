@@ -107,10 +107,10 @@ class Action(models.Model):
 class SelfCheck(models.Model):
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     check_id = models.AutoField(primary_key=True)
-    ownership = models.CharField(max_length=200)
-    participation = models.CharField(max_length=200)
-    efficiency = models.CharField(max_length=200)
-    productivity = models.CharField(max_length=200)
+    ownership = models.CharField(max_length=200, blank=True, null=True, default='')
+    participation = models.CharField(max_length=200, blank=True, null=True, default='')
+    efficiency = models.CharField(max_length=200, blank=True, null=True, default='')
+    productivity = models.CharField(max_length=200, blank=True, null=True, default='')
 
     def __str__(self):
         """A string representation of the model."""

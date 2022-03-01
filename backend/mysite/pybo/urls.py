@@ -19,6 +19,5 @@ urlpatterns = [
     # re_path('^agendas/(?P<meet_id>.+)/$', views.AgendasList.as_view()),
     # re_path('^actions/(?P<agenda_id>.+)/$', views.ActionsList.as_view()),
     # re_path('^selfchecks/(?P<meet_id>.+)/$', views.SelfChecksList.as_view()),
-
 ]
 

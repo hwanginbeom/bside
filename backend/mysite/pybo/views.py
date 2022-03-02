@@ -2,6 +2,7 @@
 import json
 from typing import Dict
 
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 from rest_framework import generics, viewsets, status, filters, permissions
@@ -124,9 +125,29 @@ class UserViewSet(viewsets.ModelViewSet):
                     return Response(response_messages, status=status.HTTP_200_OK)
 
             elif request.method == 'DELETE':
-                user_info.delete()
-                user_info = {'success': True}
-                return Response(user_info, status=status.HTTP_200_OK)
+                cause = ''
+                if request.data:
+                    if 'cause' in request.data:
+                        cause = request.data['cause']
+
+                try:
+                    delete = Secession()
+                    delete.email = user_info.email
+                    delete.cause = cause
+                    delete.save()
+
+                    user_info.delete()
+
+                    response_messages = {
+                        'success': True
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+                except:
+                    response_messages = {
+                        'success': False
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
 
             else:
                 response_messages = {
@@ -815,7 +836,16 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
             return Response(response_messages, status=status.HTTP_200_OK)
 
     # def create(self, request, *args, **kwargs):
-
+    #     if TokenChk(request).chk() != 'None':
+    #         user_id = TokenChk(request).chk()
+    #
+    #
+    #     else:
+    #         response_messages = {
+    #             'success': False,
+    #             'messages': 'token errors'
+    #         }
+    #         return Response(response_messages, status=status.HTTP_200_OK)
 
 
 # class SelfChecksList(generics.ListAPIView):
@@ -825,9 +855,5 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
 #         meet_id = self.kwargs['meet_id']
 #         return SelfCheck.objects.filter(meet_id=meet_id)
 
-
-class SecessionSerializer(viewsets.ModelViewSet):
-    queryset = Secession.objects.all()
-    serializer_class = SecessionSerializer
 
 

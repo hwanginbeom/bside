@@ -9,7 +9,6 @@ router.register('meet', views.MeetViewSet)
 router.register('agenda', views.AgendaViewSet)
 router.register('action', views.ActionViewSet)
 router.register('selfcheck', views.SelfCheckViewSet)
-router.register('secession', views.SecessionSerializer)
 # router.register(r'date-list', views.DateListViewSet)
 
 urlpatterns = [

@@ -119,8 +119,8 @@ class SelfCheck(models.Model):
 
 class Secession(models.Model):
     email = models.CharField(max_length=200)
-    cause = models.CharField(max_length=500, null=True)
-    reg_date = models.DateTimeField(null=True)
+    cause = models.CharField(max_length=500, null=True, blank=True)
+    reg_date = models.DateTimeField(auto_now=True, null=True)
 
     def __str__(self):
         return str(self.email)

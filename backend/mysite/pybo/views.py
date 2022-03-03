@@ -22,7 +22,8 @@ class TokenChk:
         try:
             header_token = request.META['HTTP_AUTHORIZATION']
             token = JWT_DECODE_HANDLER(header_token)
-            self.request = token['user_id']
+            user_id = User.objects.get(id=token['user_id'])
+            self.request = user_id.id
         except:
             self.request = 'None'
 
@@ -836,25 +837,99 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
             }
             return Response(response_messages, status=status.HTTP_200_OK)
 
-    # def create(self, request, *args, **kwargs):
-    #     if TokenChk(request).chk() != 'None':
-    #         user_id = TokenChk(request).chk()
-    #
-    #
-    #     else:
-    #         response_messages = {
-    #             'success': False,
-    #             'messages': 'token errors'
-    #         }
-    #         return Response(response_messages, status=status.HTTP_200_OK)
+    def create(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            try:
+                Meet.objects.get(meet_id=request.data['meet_id'], user_id=user_id) # 해당 유저의 meet_id가 맞는지
+
+                serializer = SelfCheckSerializer(data=request.data)
+                serializer.is_valid()
+                serializer.save()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'selfcheck_save errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def http_method_not_allowed(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            if request.method == 'PUT' or request.method == 'PATCH':
+
+                try:
+                    selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(
+                        check_id=request.data['check_id'], meet_id=request.data['meet_id'])
+
+                    serializer = SelfCheckSerializer(instance=selfcheck_info, data=request.data)
+                    serializer.is_valid()
+                    serializer.save()
+
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                except:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'selfcheck_save errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+            if request.method == 'DELETE':
+
+                try:
+                    selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(
+                        check_id=request.data['check_id'], meet_id=request.data['meet_id'])
+
+                    selfcheck_info.delete()
+
+                    response_messages = {
+                        'success': True,
+                        'action': 'delete ok'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+                except:
+                    response_messages = {
+                        'success': True,
+                        'messages': 'selfcheck_delete errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
+
+            else:
+                response_messages = {
+                    'success': False,
+                    'messages': 'method errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
 
-# class SelfChecksList(generics.ListAPIView):
-#     serializer_class = SelfCheckSerializer
-#
-#     def get_queryset(self):
-#         meet_id = self.kwargs['meet_id']
-#         return SelfCheck.objects.filter(meet_id=meet_id)
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
+    # --- 키값요청 메서드 종료처리
+    def update(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+
+    def destroy(self, request, *args, **kwargs):
+        return Response({'success': False}, status=status.HTTP_200_OK)
+    # ---
 
 

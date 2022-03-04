@@ -402,6 +402,12 @@ class AgendaViewSet(viewsets.ModelViewSet):
             if isinstance(request.data, list):
                 response_array = []
                 for i in request.data:
+                    if not'meet_id' in i or not'setting_time' in i or not'order_number' in i:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'agenda_data_fild errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
                     try:
                         Meet.objects.get(user_id=user_id, meet_id=i['meet_id']) #유저의 meet_id인지 체크
 
@@ -419,6 +425,12 @@ class AgendaViewSet(viewsets.ModelViewSet):
                 return Response(response_array, status=status.HTTP_200_OK)
 
             else:
+                if not'meet_id' in request.data or not'setting_time' in request.data or not'order_number' in request.data:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'agenda_data_fild errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
                 try:
                     Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
 
@@ -502,17 +514,12 @@ class AgendaViewSet(viewsets.ModelViewSet):
                                 return Response(response_messages, status=status.HTTP_200_OK)
 
                             agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], meet_id=meet_id.meet_id)
+                            action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
 
-                            try:
-                                action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
+                            if action_info:
                                 action_info.delete()
-
                                 response_messages.update({'action': 'delete ok'})
-                            except:
-                                response_messages.update({'action': 'None'})
-
                             agenda_info.delete()
-
                         except:
                             response_messages = {
                                 'success': False,
@@ -530,21 +537,14 @@ class AgendaViewSet(viewsets.ModelViewSet):
                         }
 
                         meet_id = Meet.objects.get(user_id=user_id, meet_id=request.data['meet_id'])  # 유저의 meet_id인지 체크
-                        meet_where = Q(meet_id=meet_id.meet_id)
 
-                        if 'agenda_id' in request.data:
-                            meet_where.add(Q(agenda_id=request.data['agenda_id']), meet_where.AND)
-
-                        agenda_info = Agenda.objects.filter(meet_where).select_related('meet_id').filter(meet_id__user_id=user_id)
-                        agenda_info.delete()
-
-                        try:
-                            action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
+                        agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=request.data['agenda_id'])
+                        action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_id.meet_id)
+                        if action_info:
                             action_info.delete()
-
                             response_messages.update({'action': 'delete ok'})
-                        except:
-                            response_messages.update({'action': 'None'})
+
+                        agenda_info.delete()
 
                         return Response(response_messages, status=status.HTTP_200_OK)
 
@@ -568,25 +568,92 @@ class AgendaViewSet(viewsets.ModelViewSet):
             }
             return Response(response_messages, status=status.HTTP_200_OK)
 
-    # --- 키값요청 메서드 종료처리
-    def update(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
-
     def retrieve(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            try:
+                agenda_info = Agenda.objects.filter(agenda_id=kwargs['pk']).select_related('meet_id')\
+                    .filter(meet_id__user_id=user_id)
+
+                serializer = AgendaSerializer(data=agenda_info, many=True)
+                serializer.is_valid()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'agenda_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def update(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+            try:
+                agenda_info = Agenda.objects.select_related('meet_id') \
+                    .filter(meet_id__user_id=user_id).get(agenda_id=kwargs['pk'])
+                agenda_json = {'meet_id': agenda_info.meet_id.meet_id}
+                agenda_json.update(request.data)
+
+                serializer = AgendaSerializer(instance=agenda_info, data=agenda_json)
+                serializer.is_valid()
+                serializer.save()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'agenda_update errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
-    # ---
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
 
+            try:
+                response_messages = {
+                    'success': True,
+                    'agenda': 'delete ok'
+                }
 
-# class AgendasList(generics.ListAPIView):
-#     serializer_class = AgendaSerializer
-#
-#     def get_queryset(self):
-#         meet_id = self.kwargs['meet_id']
-#         print(meet_id)
-#         return Agenda.objects.filter(meet_id=meet_id).order_by('order_number')
+                agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(agenda_id=kwargs['pk'])
+                action_info = Action.objects.filter(agenda_id=agenda_info.agenda_id)
+
+                if action_info:
+                    action_info.delete()
+                    response_messages.update({'action': 'delete ok'})
+
+                agenda_info.delete()
+
+                return Response(response_messages, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'agenda_delete errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
 
 class ActionViewSet(viewsets.ModelViewSet):

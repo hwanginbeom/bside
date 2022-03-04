@@ -80,12 +80,12 @@ class Agenda(models.Model):
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     agenda_id = models.AutoField(primary_key=True)
     agenda_title = models.TextField(default='')
-    agenda_status = models.CharField(max_length=200)
+    agenda_status = models.CharField(max_length=200, default='Y')
     discussion = models.TextField(blank=True, null=True)
     decisions = models.TextField(blank=True, null=True)
-    setting_time = models.IntegerField()
-    progress_time = models.IntegerField(null=True)
-    order_number = models.IntegerField()
+    setting_time = models.IntegerField(blank=True, null=True)
+    progress_time = models.IntegerField(blank=True, null=True)
+    order_number = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
         """A string representation of the model."""

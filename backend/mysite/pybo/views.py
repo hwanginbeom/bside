@@ -275,6 +275,12 @@ class MeetViewSet(viewsets.ModelViewSet):
 
             elif request.method == 'DELETE':
                 if request.data:
+                    if not'meet_id' in request.data:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'data_fild errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
                     try:
                         response_messages = {
                             'success': True,
@@ -283,23 +289,16 @@ class MeetViewSet(viewsets.ModelViewSet):
 
                         meet_id = request.data['meet_id']
                         meet_info = Meet.objects.get(user_id=user_id, meet_id=meet_id)
+                        agenda_info = Agenda.objects.filter(meet_id=meet_info.meet_id)
+                        action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_info.meet_id)
 
-                        try:
-                            agenda_info = Agenda.objects.filter(meet_id=meet_info.meet_id)
-                            print(agenda_info)
+                        if agenda_info:
                             agenda_info.delete()
-
                             response_messages.update({'agenda': 'delete ok'})
-                        except:
-                            response_messages.update({'agenda': 'None'})
 
-                        try:
-                            action_info = Action.objects.select_related('agenda_id').filter(agenda_id__meet_id=meet_info.meet_id)
+                        if action_info:
                             action_info.delete()
-
                             response_messages.update({'action': 'delete ok'})
-                        except:
-                            response_messages.update({'action': 'None'})
 
                         meet_info.delete()
 
@@ -311,14 +310,31 @@ class MeetViewSet(viewsets.ModelViewSet):
                         }
                         return Response(response_messages, status=status.HTTP_200_OK)
                 else:
-                    try:
-                        meet_info = Meet.objects.filter(user_id=user_id)
+                    meet_info = Meet.objects.filter(user_id=user_id)
+                    if meet_info:
+                        response_messages = {
+                            'success': True,
+                            'meet_all': 'delete ok'
+                        }
+
+                        agenda_info = Agenda.objects.select_related('meet_id').filter(meet_id__user_id=user_id)
+                        action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+
+                        if agenda_info:
+                            response_messages.update({'agenda_all': 'delete ok'})
+
+                        if action_info:
+                            response_messages.update({'action_all': 'delete ok'})
+
+                        action_info.delete()
+                        agenda_info.delete()
                         meet_info.delete()
-                        return Response({'success': True}, status=status.HTTP_200_OK)
-                    except:
+
+                        return Response(response_messages, status=status.HTTP_200_OK)
+                    else:
                         response_messages = {
                             'success': False,
-                            'messages': 'meet_all_delete errors'
+                            'messages': 'meet_data None'
                         }
                         return Response(response_messages, status=status.HTTP_200_OK)
             else:
@@ -345,19 +361,6 @@ class MeetViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         return Response({'success': False}, status=status.HTTP_200_OK)
     # ---
-
-
-# class MeetsList(generics.ListAPIView):
-#     serializer_class = MeetSerializer
-#     print('됨?')
-#
-#     def get_queryset(self):
-#         if self.kwargs['meet_status'] is not None:
-#             meet_status = self.kwargs['meet_status']
-#             return Meet.objects.filter(meet_status=meet_status[-1]).order_by('meet_id')
-#         elif self.kwargs['rm_status'] is not None:
-#             rm_status = self.kwargs['rm_status']
-#             return Meet.objects.filter(rm_status=rm_status[-1]).order_by('meet_id')
 
 
 class AgendaViewSet(viewsets.ModelViewSet):
@@ -405,7 +408,7 @@ class AgendaViewSet(viewsets.ModelViewSet):
                     if not'meet_id' in i or not'setting_time' in i or not'order_number' in i:
                         response_messages = {
                             'success': False,
-                            'messages': 'agenda_data_fild errors'
+                            'messages': 'data_fild errors'
                         }
                         return Response(response_messages, status=status.HTTP_200_OK)
                     try:
@@ -428,7 +431,7 @@ class AgendaViewSet(viewsets.ModelViewSet):
                 if not'meet_id' in request.data or not'setting_time' in request.data or not'order_number' in request.data:
                     response_messages = {
                         'success': False,
-                        'messages': 'agenda_data_fild errors'
+                        'messages': 'data_fild errors'
                     }
                     return Response(response_messages, status=status.HTTP_200_OK)
                 try:
@@ -810,13 +813,16 @@ class ActionViewSet(viewsets.ModelViewSet):
 
                 else:
                     try:
-                        action_where = Q(Q(agenda_id=request.data['agenda_id']))
 
-                        if 'action_id' in request.data:
-                            action_where.add(Q(action_id=request.data['action_id']), action_where.AND)
+                        if not'action_id' in request.data:
+                            response_messages = {
+                                'success': False,
+                                'messages': 'data_fild errors'
+                            }
+                            return Response(response_messages, status=status.HTTP_200_OK)
 
                         # 해당 유저의 agenda_id 맞는지 체크
-                        action_info = Action.objects.filter(action_where).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
+                        action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id).get(action_id=request.data['action_id'])
 
                         action_info.delete()
 

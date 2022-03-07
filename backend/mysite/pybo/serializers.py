@@ -60,6 +60,9 @@ class AgendaSerializer(serializers.ModelSerializer):
 
 
 class ActionSerializer(serializers.ModelSerializer):
+    action_title = serializers.CharField(max_length=200, default="")
+    person = serializers.CharField(max_length=200, default="")
+
     class Meta:
         model = Action
         fields = (

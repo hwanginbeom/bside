@@ -453,7 +453,6 @@ class MeetViewSet(viewsets.ModelViewSet):
             return Response(response_messages, status=status.HTTP_200_OK)
 
 
-
 class AgendaViewSet(viewsets.ModelViewSet):
     queryset = Agenda.objects.all()
     serializer_class = AgendaSerializer
@@ -953,14 +952,6 @@ class ActionViewSet(viewsets.ModelViewSet):
     def destroy(self, request, *args, **kwargs):
         return Response({'success': False}, status=status.HTTP_200_OK)
     # ---
-
-
-# class ActionsList(generics.ListAPIView):
-#     serializer_class = ActionSerializer
-#
-#     def get_queryset(self):
-#         agenda_id = self.kwargs['agenda_id']
-#         return Action.objects.filter(agenda_id=agenda_id)
 
 
 class SelfCheckViewSet(viewsets.ModelViewSet):

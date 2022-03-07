@@ -62,6 +62,14 @@ class UserViewSet(viewsets.ModelViewSet):
     #post(회원가입, 로그인)
     @permission_classes([AllowAny])
     def create(self, request, *args, **kwargs):
+        print(request.data[0])
+        if not'email' in request.data[0] or not'password' in request.data[0] or not'name' in request.data[0]:
+            response_messages = {
+                'success': False,
+                'messages': 'data_fild errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
         serializer = UserchkSerializer(data=request.data, many=True)
         serializer.is_valid()
         email = serializer.data[0]['email']
@@ -69,8 +77,7 @@ class UserViewSet(viewsets.ModelViewSet):
         secession_chk = serializer.data[0]['secession_chk']
         if secession_chk == 'True':
             response_messages = {
-                'success': False,
-                'messages': 'secession errors'
+                'messages': 'secession period'
             }
             return Response(response_messages, status=status.HTTP_200_OK)
 
@@ -101,22 +108,23 @@ class UserViewSet(viewsets.ModelViewSet):
     def http_method_not_allowed(self, request, *args, **kwargs):
         if TokenChk(request).chk() != 'None':
             user_id = TokenChk(request).chk()
-            #user 정보 체크
-            try:
-                user_info = User.objects.get(id=user_id)
-            except:
-                response_messages = {
-                    'success': False,
-                    'messages': 'user_info errors'
-                }
-                return Response(response_messages, status=status.HTTP_200_OK)
+            user_info = User.objects.get(id=user_id)
 
             if request.method == 'PUT' or request.method == 'PATCH':
+                if 'email' in request.data or 'password' in request.data:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'data_fild errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
                 try:
                     serializer = UserSerializer(instance=user_info, data=request.data)
                     serializer.is_valid()
                     serializer.save()
+
                     user_info = serializer.data
+                    user_info.pop('password')
+
                     return Response(user_info, status=status.HTTP_200_OK)
                 except:
                     response_messages = {

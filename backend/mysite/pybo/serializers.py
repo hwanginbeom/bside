@@ -9,6 +9,9 @@ from .models import *
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = serializers.CharField(max_length=200, required=False)
+    password = serializers.CharField(max_length=200, required=False)
+
     class Meta:
         model = User
         fields = (
@@ -93,6 +96,9 @@ class SecessionSerializer(serializers.ModelSerializer):
 
 # 유저 db저장
 class UsersaveSerializer(serializers.ModelSerializer):
+    provider = serializers.CharField(max_length=200, default="")
+    img = serializers.CharField(max_length=500, default="")
+
     class Meta:
         model = User
         fields = ['password', 'email', 'name', 'img', 'provider', 'nickname']
@@ -128,18 +134,19 @@ class UserchkSerializer(serializers.Serializer):
             user = 'None'
 
         if user == 'None':
-            try: #탈퇴하기 (탈퇴한날 부터 7일 계산)
+            try:
                 secession_email = Secession.objects.filter(email=email).order_by('-reg_date')[0:1]
                 if secession_email[0].reg_date:
                     start_date = secession_email[0].reg_date
                     end_date = start_date + timedelta(days=1)
-                    try:
-                        Secession.objects.filter(Q(email=email) and Q(reg_date__range=[start_date, end_date])).order_by('-reg_date')[0:1]
 
+                    var = Secession.objects.filter(
+                        Q(email=email) and Q(reg_date__range=[start_date, end_date])).order_by('-reg_date')[0:1]
+
+                    if var:
                         secession_chk = 'True'
-                    except:
+                    else:
                         secession_chk = 'None'
-
                 else:
                     secession_chk = 'None'
 

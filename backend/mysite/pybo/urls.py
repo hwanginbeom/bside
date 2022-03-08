@@ -7,6 +7,7 @@ router = routers.DefaultRouter()
 router.register('user', views.UserViewSet)
 router.register('meet', views.MeetViewSet)
 router.register('agenda', views.AgendaViewSet)
+router.register('progress', views.ProgressViewSet)
 router.register('action', views.ActionViewSet)
 router.register('selfcheck', views.SelfCheckViewSet)
 

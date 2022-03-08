@@ -475,6 +475,7 @@ class AgendaViewSet(viewsets.ModelViewSet):
                 agenda_info = Agenda.objects.filter(agenda_where).select_related('meet_id').filter(meet_id__user_id=user_id).order_by('order_number')
                 serializer = AgendaSerializer(data=agenda_info, many=True)
                 serializer.is_valid()
+
                 return Response(serializer.data, status=status.HTTP_200_OK)
             except:
                 response_messages = {
@@ -508,7 +509,19 @@ class AgendaViewSet(viewsets.ModelViewSet):
                         serializer = AgendaSerializer(data=i)
                         serializer.is_valid()
                         serializer.save()
+
+                        agenda_info = serializer.data
+                        progress_json = [{
+                            "agenda_id": agenda_info['agenda_id'],
+                            "progress_time": agenda_info['progress_time']
+                        }]
+
+                        progress_serializer = ProgressSerializer(data=progress_json, many=True)
+                        progress_serializer.is_valid()
+                        progress_serializer.save()
+
                         response_array.append(serializer.data)
+                        response_array.append(progress_serializer.data[0])
                     except:
                         response_messages = {
                             'success': False,
@@ -532,6 +545,17 @@ class AgendaViewSet(viewsets.ModelViewSet):
                     serializer.is_valid()
                     serializer.save()
                     agenda_info = serializer.data
+
+                    progress_json = [{
+                        "agenda_id": agenda_info['agenda_id'],
+                        "progress_time": agenda_info['progress_time']
+                    }]
+
+                    progress_serializer = ProgressSerializer(data=progress_json, many=True)
+                    progress_serializer.is_valid()
+                    progress_serializer.save()
+
+                    agenda_info.update(progress_serializer.data[0])
                 except:
                     response_messages = {
                         'success': False,
@@ -750,6 +774,11 @@ class AgendaViewSet(viewsets.ModelViewSet):
             return Response(response_messages, status=status.HTTP_200_OK)
 
 
+class ProgressViewSet(viewsets.ModelViewSet):
+    queryset = Agenda_progress.objects.all()
+    serializer_class = ProgressSerializer
+
+
 class ActionViewSet(viewsets.ModelViewSet):
     queryset = Action.objects.all()
     serializer_class = ActionSerializer
@@ -792,6 +821,13 @@ class ActionViewSet(viewsets.ModelViewSet):
             if isinstance(request.data, list):
                 response_array = []
                 for i in request.data:
+                    if not"agenda_id" in i:
+                        response_messages = {
+                            'success': False,
+                            'messages': 'data_fild errors'
+                        }
+                        return Response(response_messages, status=status.HTTP_200_OK)
+
                     try:
                         # 해당 유저의 agenda_id 맞는지 체크
                         Action.objects.filter(agenda_id=i['agenda_id']).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
@@ -812,6 +848,12 @@ class ActionViewSet(viewsets.ModelViewSet):
                 return Response(response_array, status=status.HTTP_200_OK)
 
             else:
+                if not"agenda_id" in request.data:
+                    response_messages = {
+                        'success': False,
+                        'messages': 'data_fild errors'
+                    }
+                    return Response(response_messages, status=status.HTTP_200_OK)
                 try:
                     # 해당 유저의 agenda_id 맞는지 체크
                     Action.objects.filter(agenda_id=request.data['agenda_id']).select_related('agenda_id', 'agenda_id__meet_id').filter(agenda_id__meet_id__user_id=user_id)
@@ -846,7 +888,7 @@ class ActionViewSet(viewsets.ModelViewSet):
                         try:
                             # 해당 유저의 agenda_id 맞는지 체크
                             action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id')\
-                                .filter(agenda_id__meet_id__user_id=user_id).get(agenda_id=i['agenda_id'], action_id=i['action_id'])
+                                .filter(agenda_id__meet_id__user_id=user_id).get(action_id=i['action_id'])
 
                             serializer = ActionSerializer(instance=action_info, data=i)
                             serializer.is_valid()
@@ -865,7 +907,7 @@ class ActionViewSet(viewsets.ModelViewSet):
                     try:
                         # 해당 유저의 agenda_id 맞는지 체크
                         action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id') \
-                            .filter(agenda_id__meet_id__user_id=user_id).get(agenda_id=request.data['agenda_id'], action_id=request.data['action_id'])
+                            .filter(agenda_id__meet_id__user_id=user_id).get(action_id=request.data['action_id'])
 
                         serializer = ActionSerializer(instance=action_info, data=request.data)
                         serializer.is_valid()
@@ -943,16 +985,88 @@ class ActionViewSet(viewsets.ModelViewSet):
             }
             return Response(response_messages, status=status.HTTP_200_OK)
 
-    # --- 키값요청 메서드 종료처리
-    def update(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
-
     def retrieve(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            action_info = Action.objects.filter(action_id=kwargs['pk']).select_related('agenda_id', 'agenda_id__meet_id').filter(
+                agenda_id__meet_id__user_id=user_id)
+
+            if action_info:
+                serializer = ActionSerializer(data=action_info, many=True)
+                serializer.is_valid()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                response_messages = {
+                    'success': False,
+                    'messages': 'action_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def update(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            try:
+                action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id').filter(
+                    agenda_id__meet_id__user_id=user_id).get(action_id=kwargs['pk'])
+
+                serializer = ActionSerializer(instance=action_info, data=request.data)
+                serializer.is_valid()
+                serializer.save()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'action_update errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
-    # ---
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            try:
+                action_info = Action.objects.select_related('agenda_id', 'agenda_id__meet_id').filter(
+                    agenda_id__meet_id__user_id=user_id).get(action_id=kwargs['pk'])
+
+                action_info.delete()
+
+                response_messages = {
+                    'success': True,
+                    'action': 'delete ok'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'action_delete errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
 
 class SelfCheckViewSet(viewsets.ModelViewSet):
@@ -1024,10 +1138,9 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
             user_id = TokenChk(request).chk()
 
             if request.method == 'PUT' or request.method == 'PATCH':
-
                 try:
                     selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(
-                        check_id=request.data['check_id'], meet_id=request.data['meet_id'])
+                        check_id=request.data['check_id'])
 
                     serializer = SelfCheckSerializer(instance=selfcheck_info, data=request.data)
                     serializer.is_valid()
@@ -1042,10 +1155,9 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
                     return Response(response_messages, status=status.HTTP_200_OK)
 
             if request.method == 'DELETE':
-
                 try:
                     selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(meet_id__user_id=user_id).get(
-                        check_id=request.data['check_id'], meet_id=request.data['meet_id'])
+                        check_id=request.data['check_id'])
 
                     selfcheck_info.delete()
 
@@ -1068,6 +1180,32 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
                 }
                 return Response(response_messages, status=status.HTTP_200_OK)
 
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+    def retrieve(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            selfcheck_info = SelfCheck.objects.filter(check_id=kwargs['pk']).select_related('meet_id').filter(
+                meet_id__user_id=user_id)
+
+            if selfcheck_info:
+                serializer = SelfCheckSerializer(data=selfcheck_info, many=True)
+                serializer.is_valid()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            else:
+                response_messages = {
+                    'success': False,
+                    'messages': 'SelfCheck_info errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
 
         else:
             response_messages = {
@@ -1076,15 +1214,63 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
             }
             return Response(response_messages, status=status.HTTP_200_OK)
 
-    # --- 키값요청 메서드 종료처리
     def update(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
 
-    def retrieve(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
+            try:
+                selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(
+                    meet_id__user_id=user_id).get(check_id=kwargs['pk'])
+
+                serializer = SelfCheckSerializer(instance=selfcheck_info, data=request.data)
+                serializer.is_valid()
+                serializer.save()
+
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'selfcheck_update errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
 
     def destroy(self, request, *args, **kwargs):
-        return Response({'success': False}, status=status.HTTP_200_OK)
-    # ---
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            try:
+                selfcheck_info = SelfCheck.objects.select_related('meet_id').filter(
+                    meet_id__user_id=user_id).get(check_id=kwargs['pk'])
+
+                selfcheck_info.delete()
+
+                response_messages = {
+                    'success': True,
+                    'selfcheck': 'delete ok'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+            except:
+                response_messages = {
+                    'success': False,
+                    'messages': 'selfcheck_delete errors'
+                }
+                return Response(response_messages, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
 
 

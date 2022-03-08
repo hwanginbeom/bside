@@ -92,11 +92,17 @@ class Agenda(models.Model):
         return str(self.agenda_id)
 
 
+class Agenda_progress(models.Model):
+    agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
+    progress_id = models.AutoField(primary_key=True)
+    progress_time = models.IntegerField(blank=True, null=True, default="")
+
+
 class Action(models.Model):
     agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
     action_id = models.AutoField(primary_key=True)
-    action_title = models.TextField(blank=True, null=True)
-    person = models.TextField(blank=True, null=True)
+    action_title = models.TextField(blank=True, null=True, default="")
+    person = models.TextField(blank=True, null=True, default="")
     dead_line = models.DateTimeField(null=True)
 
     def __str__(self):

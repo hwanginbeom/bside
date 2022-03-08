@@ -59,9 +59,20 @@ class AgendaSerializer(serializers.ModelSerializer):
         )
 
 
+class ProgressSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Agenda_progress
+        fields = (
+            'agenda_id',
+            'progress_id',
+            'progress_time',
+        )
+
+
 class ActionSerializer(serializers.ModelSerializer):
-    action_title = serializers.CharField(max_length=200, default="")
-    person = serializers.CharField(max_length=200, default="")
+    agenda_id = serializers.CharField(max_length=200, required=False)
+    action_title = serializers.CharField(max_length=200, required=False)
+    person = serializers.CharField(max_length=200, required=False)
 
     class Meta:
         model = Action
@@ -75,6 +86,8 @@ class ActionSerializer(serializers.ModelSerializer):
 
 
 class SelfCheckSerializer(serializers.ModelSerializer):
+    meet_id = serializers.CharField(max_length=200, required=False)
+
     class Meta:
         model = SelfCheck
         fields = (

@@ -70,6 +70,18 @@ class ProgressSerializer(serializers.ModelSerializer):
             'progress_time',
         )
 
+    def create(self, validated_data):
+        agenda_id = Agenda.objects.get(agenda_id=validated_data['agenda_id'])
+        progress_time = ""
+        if "progress_time" in validated_data:
+            progress_time = validated_data['progress_time']
+
+        progress = Agenda_progress.objects.create(
+            agenda_id=agenda_id,
+            progress_time=progress_time
+        )
+        return progress
+
 
 class ActionSerializer(serializers.ModelSerializer):
     agenda_id = serializers.CharField(max_length=200, required=False)

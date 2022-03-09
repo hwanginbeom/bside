@@ -135,6 +135,53 @@ class SelfCheckSerializer(serializers.ModelSerializer):
             'check10',
         )
 
+    def create(self, validated_data):
+        meet_id = Meet.objects.get(meet_id=validated_data['meet_id'])
+        check1 = ""
+        check2 = ""
+        check3 = ""
+        check4 = ""
+        check5 = ""
+        check6 = ""
+        check7 = ""
+        check8 = ""
+        check9 = ""
+        check10 = ""
+        if "check1" in validated_data:
+            check1 = validated_data['check1']
+        if "check2" in validated_data:
+            check2 = validated_data['check2']
+        if "check3" in validated_data:
+            check3 = validated_data['check3']
+        if "check4" in validated_data:
+            check4 = validated_data['check4']
+        if "check5" in validated_data:
+            check5 = validated_data['check5']
+        if "check6" in validated_data:
+            check6 = validated_data['check6']
+        if "check7" in validated_data:
+            check7 = validated_data['check7']
+        if "check8" in validated_data:
+            check8 = validated_data['check8']
+        if "check9" in validated_data:
+            check9 = validated_data['check9']
+        if "check10" in validated_data:
+            check10 = validated_data['check10']
+        selfcheck = SelfCheck.objects.create(
+            meet_id=meet_id,
+            check1=check1,
+            check2=check2,
+            check3=check3,
+            check4=check4,
+            check5=check5,
+            check6=check6,
+            check7=check7,
+            check8=check8,
+            check9=check9,
+            check10=check10,
+        )
+        return selfcheck
+
 
 class SecessionSerializer(serializers.ModelSerializer):
     class Meta:

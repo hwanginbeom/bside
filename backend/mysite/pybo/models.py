@@ -80,11 +80,11 @@ class Agenda(models.Model):
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     agenda_id = models.AutoField(primary_key=True)
     agenda_title = models.TextField(default='')
-    agenda_status = models.CharField(max_length=200, default='Y')
-    discussion = models.TextField(blank=True, null=True)
-    decisions = models.TextField(blank=True, null=True)
+    agenda_status = models.CharField(max_length=200, blank=True, default='')
+    discussion = models.TextField(blank=True, null=True, default='')
+    decisions = models.TextField(blank=True, null=True, default='')
     setting_time = models.IntegerField(blank=True, null=True)
-    progress_time = models.IntegerField(blank=True, null=True)
+    progress_time = models.TextField(blank=True, null=True, default='')
     order_number = models.IntegerField(blank=True, null=True)
 
     def __str__(self):
@@ -95,7 +95,7 @@ class Agenda(models.Model):
 class Agenda_progress(models.Model):
     agenda_id = models.ForeignKey('Agenda', on_delete=models.CASCADE, db_column='agenda_id')
     progress_id = models.AutoField(primary_key=True)
-    progress_time = models.IntegerField(blank=True, null=True, default="")
+    progress_time = models.TextField(blank=True, null=True, default="")
 
 
 class Action(models.Model):
@@ -113,10 +113,16 @@ class Action(models.Model):
 class SelfCheck(models.Model):
     meet_id = models.ForeignKey('Meet', on_delete=models.CASCADE, db_column='meet_id')
     check_id = models.AutoField(primary_key=True)
-    ownership = models.CharField(max_length=200, blank=True, null=True, default='')
-    participation = models.CharField(max_length=200, blank=True, null=True, default='')
-    efficiency = models.CharField(max_length=200, blank=True, null=True, default='')
-    productivity = models.CharField(max_length=200, blank=True, null=True, default='')
+    check1 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check2 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check3 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check4 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check5 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check6 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check7 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check8 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check9 = models.CharField(max_length=200, blank=True, null=True, default='')
+    check10 = models.CharField(max_length=200, blank=True, null=True, default='')
 
     def __str__(self):
         """A string representation of the model."""

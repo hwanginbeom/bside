@@ -60,6 +60,8 @@ class AgendaSerializer(serializers.ModelSerializer):
 
 
 class ProgressSerializer(serializers.ModelSerializer):
+    agenda_id = serializers.CharField(max_length=200, required=False)
+
     class Meta:
         model = Agenda_progress
         fields = (
@@ -84,6 +86,22 @@ class ActionSerializer(serializers.ModelSerializer):
             'dead_line',
         )
 
+    def create(self, validated_data):
+        agenda_id = Agenda.objects.get(agenda_id=validated_data['agenda_id'])
+        action_title = ""
+        person = ""
+        if "action_title" in validated_data:
+            action_title = validated_data['action_title']
+        if "person" in validated_data:
+            person = validated_data['person']
+
+        action = Action.objects.create(
+            agenda_id=agenda_id,
+            action_title=action_title,
+            person=person
+        )
+        return action
+
 
 class SelfCheckSerializer(serializers.ModelSerializer):
     meet_id = serializers.CharField(max_length=200, required=False)
@@ -93,10 +111,16 @@ class SelfCheckSerializer(serializers.ModelSerializer):
         fields = (
             'meet_id',
             'check_id',
-            'ownership',
-            'participation',
-            'efficiency',
-            'productivity',
+            'check1',
+            'check2',
+            'check3',
+            'check4',
+            'check5',
+            'check6',
+            'check7',
+            'check8',
+            'check9',
+            'check10',
         )
 
 

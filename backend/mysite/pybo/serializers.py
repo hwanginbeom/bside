@@ -266,7 +266,7 @@ JWT_DECODE_HANDLER = api_settings.JWT_DECODE_HANDLER
 
 
 class UserloginSerializer(serializers.Serializer):
-    email = serializers.CharField(max_length=200)
+    email = serializers.CharField(max_length=200, required=False)
     password = serializers.CharField(max_length=200, write_only=True, required=False)
     name = serializers.CharField(max_length=200, required=False)
     nickname = serializers.CharField(max_length=200, required=False)
@@ -277,17 +277,19 @@ class UserloginSerializer(serializers.Serializer):
         password = data.get('password', None)
         name = data.get('name', None)
         nickname = data.get('nickname', None)
-        user = authenticate(email=email, password=password, name=name, nickname=nickname)
 
         try:
-            payload = JWT_PAYLOAD_HANDLER(user)
-            token = JWT_ENCODE_HANDLER(payload)
+            user = User.objects.get(email=email, name=name, nickname=nickname)
 
-            update_last_login(None, user)
-        except user.DoesNotExist:
-            raise serializers.ValidationError(
-                'User with given username and password does not exist'
-            )
+            if user.check_password(password):
+                payload = JWT_PAYLOAD_HANDLER(user)
+                token = JWT_ENCODE_HANDLER(payload)
+
+                update_last_login(None, user)
+            else:
+                return {'token': "user_info errors"}
+        except:
+            return {'token': "user_info errors"}
 
         return {'token': token}
 

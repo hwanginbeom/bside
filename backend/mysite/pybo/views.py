@@ -62,7 +62,7 @@ class UserViewSet(viewsets.ModelViewSet):
     #post(회원가입, 로그인)
     @permission_classes([AllowAny])
     def create(self, request, *args, **kwargs):
-        print(request.data[0])
+
         if not'email' in request.data[0] or not'password' in request.data[0] or not'name' in request.data[0]:
             response_messages = {
                 'success': False,
@@ -101,8 +101,7 @@ class UserViewSet(viewsets.ModelViewSet):
             serializer.is_valid()
             token = serializer.validated_data[0]['token']
             res = {'success': True, 'token': token}
-            response = Response(res, status=status.HTTP_200_OK)
-            return response
+            return Response(res, status=status.HTTP_200_OK)
 
     #update, delete
     def http_method_not_allowed(self, request, *args, **kwargs):

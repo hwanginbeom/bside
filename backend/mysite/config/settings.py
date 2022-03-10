@@ -34,7 +34,7 @@ SECRET_KEY = 'w=8akg)9oz+fc%chr39z5zalhva&8kznpd0jn_$5ba5v7i!#)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["125.6.40.68", "59mins.net", "125.6.39.225", "sublog.linl", "http://sublog.linl", "http://125.6.39.225:3000/"]
+ALLOWED_HOSTS = ["125.6.40.68", "59mins.net", "125.6.39.225", "sublog.link ", "http://sublog.link ", "http://125.6.39.225:3000/"]
 # ALLOWED_HOSTS = ['*']
 
 # Application definition

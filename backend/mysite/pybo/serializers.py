@@ -85,8 +85,8 @@ class ProgressSerializer(serializers.ModelSerializer):
 
 class ActionSerializer(serializers.ModelSerializer):
     agenda_id = serializers.CharField(max_length=200, required=False)
-    action_title = serializers.CharField(max_length=200, required=False)
-    person = serializers.CharField(max_length=200, required=False)
+    action_title = serializers.CharField(max_length=200, required=False, allow_blank=True)
+    person = serializers.CharField(max_length=200, required=False, allow_blank=True)
 
     class Meta:
         model = Action
@@ -102,6 +102,7 @@ class ActionSerializer(serializers.ModelSerializer):
         agenda_id = Agenda.objects.get(agenda_id=validated_data['agenda_id'])
         action_title = ""
         person = ""
+
         if "action_title" in validated_data:
             action_title = validated_data['action_title']
         if "person" in validated_data:

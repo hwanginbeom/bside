@@ -85,8 +85,8 @@ class ProgressSerializer(serializers.ModelSerializer):
 
 class ActionSerializer(serializers.ModelSerializer):
     agenda_id = serializers.CharField(max_length=200, required=False)
-    action_title = serializers.CharField(max_length=200, required=False)
-    person = serializers.CharField(max_length=200, required=False)
+    action_title = serializers.CharField(max_length=200, required=False, allow_blank=True)
+    person = serializers.CharField(max_length=200, required=False, allow_blank=True)
 
     class Meta:
         model = Action

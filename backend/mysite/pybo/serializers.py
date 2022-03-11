@@ -102,6 +102,7 @@ class ActionSerializer(serializers.ModelSerializer):
         agenda_id = Agenda.objects.get(agenda_id=validated_data['agenda_id'])
         action_title = ""
         person = ""
+
         if "action_title" in validated_data:
             action_title = validated_data['action_title']
         if "person" in validated_data:

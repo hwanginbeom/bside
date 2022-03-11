@@ -1,0 +1,321 @@
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"AutoImportSettings\">\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\n  </component>\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"e0fca945-e396-4528-ac3a-be37c3736cbf\" name=\"변경\" comment=\"login_update\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/mysite/config/settings.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/mysite/config/settings.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/mysite/pybo/models.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/mysite/pybo/models.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/mysite/pybo/serializers.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/mysite/pybo/serializers.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/mysite/pybo/urls.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/mysite/pybo/urls.py\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/backend/mysite/pybo/views.py\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/backend/mysite/pybo/views.py\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Python Script\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"FindInProjectRecents\">\n    <findStrings>\n      <find>post</find>\n      <find>User.groups</find>\n      <find>STATIC_URL</find>\n      <find>mysql</find>\n      <find>BASE_DIR</find>\n      <find>STATIC_URL</find>\n      <find>STATIC_ROOT</find>\n      <find>TEMPLATES</find>\n      <find>REST_FRAMEWORK</find>\n    </findStrings>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\n      <map>\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\n      </map>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/backend/mysite/pybo/serializers.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/pybo/urls.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/pybo/views.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/pybo/models.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/pybo/admin.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/config/urls.py\" />\n        <option value=\"$PROJECT_DIR$/window_venv/Lib/site-packages/django/core/management/commands/diffsettings.py\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/config/settings/base.py\" />\n        <option value=\"$PROJECT_DIR$/backend/requirements.txt\" />\n        <option value=\"$PROJECT_DIR$/backend/mysite/config/settings.py\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\n    <option name=\"x\" value=\"186\" />\n    <option name=\"y\" value=\"-24\" />\n    <option name=\"width\" value=\"1944\" />\n    <option name=\"height\" value=\"1044\" />\n  </component>\n  <component name=\"ProjectId\" id=\"253ZNNjKaXWfxs0L61CojMjTEFK\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\n  <component name=\"ProjectView\">\n    <navigator proportions=\"\" version=\"1\">\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <expand>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"backend\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"backend\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"mysite\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"backend\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"mysite\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"config\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"backend\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"mysite\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"pybo\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"0203\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"0203\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"backend\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"static_root\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n          </expand>\n          <select />\n        </subPane>\n      </pane>\n      <pane id=\"Scope\" />\n    </panes>\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"RecentsManager\">\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\hwang in beom\\Desktop\\bside\\0203\\backend\\mysite\\config\\settings\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"애플리케이션 수준\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"e0fca945-e396-4528-ac3a-be37c3736cbf\" name=\"변경\" comment=\"login_update\" />\n      <created>1643814216192</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1643814216192</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"login_update\">\n      <created>1644775379161</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1644775379161</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"2\" />\n    <servers />\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"-7\" y=\"-7\" width=\"1295\" height=\"695\" extended-state=\"6\" />\n    <editor active=\"true\" />\n    <layout>\n      <window_info id=\"Favorites\" side_tool=\"true\" />\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"0\" visible=\"true\" weight=\"0.24939272\" />\n      <window_info id=\"Structure\" order=\"1\" side_tool=\"true\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Version Control\" />\n      <window_info anchor=\"bottom\" id=\"Python Console\" />\n      <window_info active=\"true\" anchor=\"bottom\" id=\"Terminal\" visible=\"true\" weight=\"0.4395018\" />\n      <window_info anchor=\"bottom\" id=\"Event Log\" side_tool=\"true\" />\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"0\" />\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"1\" weight=\"0.3291815\" />\n      <window_info anchor=\"bottom\" id=\"Run\" order=\"2\" />\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"3\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"4\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"5\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"6\" />\n      <window_info anchor=\"right\" id=\"R Packages\" />\n      <window_info anchor=\"right\" id=\"R Graphics\" />\n      <window_info anchor=\"right\" id=\"Commander\" internal_type=\"SLIDING\" order=\"0\" type=\"SLIDING\" weight=\"0.4\" />\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"1\" weight=\"0.25\" />\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"2\" weight=\"0.25\" />\n    </layout>\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <MESSAGE value=\"login_update\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"login_update\" />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/pybo/serializers.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"1064\">\n          <caret line=\"56\" selection-start-line=\"56\" selection-end-line=\"56\" />\n          <folding>\n            <element signature=\"e#29#67#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/pybo/urls.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"186\">\n          <caret line=\"13\" column=\"1\" selection-start-line=\"13\" selection-start-column=\"1\" selection-end-line=\"13\" selection-end-column=\"1\" />\n          <folding>\n            <element signature=\"e#22#59#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/config/wsgi.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/pybo/views.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-80\">\n          <caret line=\"5\" selection-start-line=\"5\" selection-end-line=\"5\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/window_venv/Lib/site-packages/django/db/models/base.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"224\">\n          <caret line=\"115\" selection-start-line=\"115\" selection-end-line=\"115\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/pybo/admin.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"72\">\n          <caret line=\"5\" selection-start-line=\"5\" selection-end-line=\"5\" />\n          <folding>\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/window_venv/Lib/site-packages/django/core/management/commands/diffsettings.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"117\">\n          <caret line=\"9\" column=\"55\" selection-start-line=\"9\" selection-start-column=\"55\" selection-end-line=\"9\" selection-end-column=\"55\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/requirements.txt\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"114\">\n          <caret line=\"6\" column=\"1\" selection-start-line=\"6\" selection-start-column=\"1\" selection-end-line=\"6\" selection-end-column=\"1\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/config/urls.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-265\">\n          <caret line=\"6\" selection-start-line=\"6\" selection-end-line=\"6\" />\n          <folding>\n            <element signature=\"e#0#32#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/manage.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/config/settings.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"129\">\n          <caret line=\"40\" column=\"18\" lean-forward=\"true\" selection-start-line=\"40\" selection-start-column=\"18\" selection-end-line=\"40\" selection-end-column=\"18\" />\n          <folding>\n            <element signature=\"e#307#331#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/backend/mysite/pybo/models.py\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"123\">\n          <caret line=\"89\" column=\"12\" selection-start-line=\"89\" selection-start-column=\"4\" selection-end-line=\"89\" selection-end-column=\"12\" />\n        </state>\n      </provider>\n    </entry>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision a18dbd8c007d5588f9d63faff5d05b0edfb1e4c3)
++++ b/.idea/workspace.xml	(date 1646918695116)
+@@ -4,12 +4,10 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="login_update">
++    <list default="true" id="e0fca945-e396-4528-ac3a-be37c3736cbf" name="변경" comment="api update">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/backend/mysite/config/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/config/settings.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/models.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/serializers.py" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/urls.py" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/backend/mysite/pybo/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/backend/mysite/pybo/views.py" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -154,7 +152,224 @@
+       <option name="project" value="LOCAL" />
+       <updated>1644775379161</updated>
+     </task>
+-    <option name="localTasksCounter" value="2" />
++    <task id="LOCAL-00002" summary="secession_update">
++      <created>1645450287076</created>
++      <option name="number" value="00002" />
++      <option name="presentableId" value="LOCAL-00002" />
++      <option name="project" value="LOCAL" />
++      <updated>1645450287076</updated>
++    </task>
++    <task id="LOCAL-00003" summary="secession_update">
++      <created>1645450325396</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1645450325396</updated>
++    </task>
++    <task id="LOCAL-00004" summary="secession_update">
++      <created>1645450553950</created>
++      <option name="number" value="00004" />
++      <option name="presentableId" value="LOCAL-00004" />
++      <option name="project" value="LOCAL" />
++      <updated>1645450553950</updated>
++    </task>
++    <task id="LOCAL-00005" summary="update">
++      <created>1645534988512</created>
++      <option name="number" value="00005" />
++      <option name="presentableId" value="LOCAL-00005" />
++      <option name="project" value="LOCAL" />
++      <updated>1645534988512</updated>
++    </task>
++    <task id="LOCAL-00006" summary="user_get_token">
++      <created>1645542609027</created>
++      <option name="number" value="00006" />
++      <option name="presentableId" value="LOCAL-00006" />
++      <option name="project" value="LOCAL" />
++      <updated>1645542609027</updated>
++    </task>
++    <task id="LOCAL-00007" summary="user_get_token">
++      <created>1645543360551</created>
++      <option name="number" value="00007" />
++      <option name="presentableId" value="LOCAL-00007" />
++      <option name="project" value="LOCAL" />
++      <updated>1645543360551</updated>
++    </task>
++    <task id="LOCAL-00008" summary="api_token_check_ing">
++      <created>1645772037225</created>
++      <option name="number" value="00008" />
++      <option name="presentableId" value="LOCAL-00008" />
++      <option name="project" value="LOCAL" />
++      <updated>1645772037225</updated>
++    </task>
++    <task id="LOCAL-00009" summary="user_completion">
++      <created>1645894373338</created>
++      <option name="number" value="00009" />
++      <option name="presentableId" value="LOCAL-00009" />
++      <option name="project" value="LOCAL" />
++      <updated>1645894373338</updated>
++    </task>
++    <task id="LOCAL-00010" summary="meet_completion">
++      <created>1645905081480</created>
++      <option name="number" value="00010" />
++      <option name="presentableId" value="LOCAL-00010" />
++      <option name="project" value="LOCAL" />
++      <updated>1645905081480</updated>
++    </task>
++    <task id="LOCAL-00011" summary="meet_completion">
++      <created>1645954546713</created>
++      <option name="number" value="00011" />
++      <option name="presentableId" value="LOCAL-00011" />
++      <option name="project" value="LOCAL" />
++      <updated>1645954546713</updated>
++    </task>
++    <task id="LOCAL-00012" summary="all_table_user_id_column_plus">
++      <created>1645955902426</created>
++      <option name="number" value="00012" />
++      <option name="presentableId" value="LOCAL-00012" />
++      <option name="project" value="LOCAL" />
++      <updated>1645955902426</updated>
++    </task>
++    <task id="LOCAL-00013" summary="column_plus_meet_post_update">
++      <created>1645959999645</created>
++      <option name="number" value="00013" />
++      <option name="presentableId" value="LOCAL-00013" />
++      <option name="project" value="LOCAL" />
++      <updated>1645959999645</updated>
++    </task>
++    <task id="LOCAL-00014" summary="column_delete">
++      <created>1645965230306</created>
++      <option name="number" value="00014" />
++      <option name="presentableId" value="LOCAL-00014" />
++      <option name="project" value="LOCAL" />
++      <updated>1645965230306</updated>
++    </task>
++    <task id="LOCAL-00015" summary="agenda_completion">
++      <created>1645988321298</created>
++      <option name="number" value="00015" />
++      <option name="presentableId" value="LOCAL-00015" />
++      <option name="project" value="LOCAL" />
++      <updated>1645988321298</updated>
++    </task>
++    <task id="LOCAL-00016" summary="action_completion">
++      <created>1646038057323</created>
++      <option name="number" value="00016" />
++      <option name="presentableId" value="LOCAL-00016" />
++      <option name="project" value="LOCAL" />
++      <updated>1646038057323</updated>
++    </task>
++    <task id="LOCAL-00017" summary="agenda, action column_update">
++      <created>1646127150203</created>
++      <option name="number" value="00017" />
++      <option name="presentableId" value="LOCAL-00017" />
++      <option name="project" value="LOCAL" />
++      <updated>1646127150203</updated>
++    </task>
++    <task id="LOCAL-00018" summary="agenda, action column_update">
++      <created>1646128187446</created>
++      <option name="number" value="00018" />
++      <option name="presentableId" value="LOCAL-00018" />
++      <option name="project" value="LOCAL" />
++      <updated>1646128187446</updated>
++    </task>
++    <task id="LOCAL-00019" summary="agenda, action column_update">
++      <created>1646128240012</created>
++      <option name="number" value="00019" />
++      <option name="presentableId" value="LOCAL-00019" />
++      <option name="project" value="LOCAL" />
++      <updated>1646128240012</updated>
++    </task>
++    <task id="LOCAL-00020" summary="rollback">
++      <created>1646129935720</created>
++      <option name="number" value="00020" />
++      <option name="presentableId" value="LOCAL-00020" />
++      <option name="project" value="LOCAL" />
++      <updated>1646129935720</updated>
++    </task>
++    <task id="LOCAL-00021" summary="meet, agenda, action GET방식 update">
++      <created>1646142786356</created>
++      <option name="number" value="00021" />
++      <option name="presentableId" value="LOCAL-00021" />
++      <option name="project" value="LOCAL" />
++      <updated>1646142786356</updated>
++    </task>
++    <task id="LOCAL-00022" summary="secession api delete">
++      <created>1646223055106</created>
++      <option name="number" value="00022" />
++      <option name="presentableId" value="LOCAL-00022" />
++      <option name="project" value="LOCAL" />
++      <updated>1646223055106</updated>
++    </task>
++    <task id="LOCAL-00023" summary="selfcheck api completion">
++      <created>1646310417398</created>
++      <option name="number" value="00023" />
++      <option name="presentableId" value="LOCAL-00023" />
++      <option name="project" value="LOCAL" />
++      <updated>1646310417398</updated>
++    </task>
++    <task id="LOCAL-00024" summary="agenda_update">
++      <created>1646377364367</created>
++      <option name="number" value="00024" />
++      <option name="presentableId" value="LOCAL-00024" />
++      <option name="project" value="LOCAL" />
++      <updated>1646377364367</updated>
++    </task>
++    <task id="LOCAL-00025" summary="meet_delete">
++      <created>1646483359197</created>
++      <option name="number" value="00025" />
++      <option name="presentableId" value="LOCAL-00025" />
++      <option name="project" value="LOCAL" />
++      <updated>1646483359197</updated>
++    </task>
++    <task id="LOCAL-00026" summary="user_update">
++      <created>1646636825085</created>
++      <option name="number" value="00026" />
++      <option name="presentableId" value="LOCAL-00026" />
++      <option name="project" value="LOCAL" />
++      <updated>1646636825085</updated>
++    </task>
++    <task id="LOCAL-00027" summary="meet_update">
++      <created>1646640480917</created>
++      <option name="number" value="00027" />
++      <option name="presentableId" value="LOCAL-00027" />
++      <option name="project" value="LOCAL" />
++      <updated>1646640480917</updated>
++    </task>
++    <task id="LOCAL-00028" summary="action_update">
++      <created>1646654255290</created>
++      <option name="number" value="00028" />
++      <option name="presentableId" value="LOCAL-00028" />
++      <option name="project" value="LOCAL" />
++      <updated>1646654255290</updated>
++    </task>
++    <task id="LOCAL-00029" summary="action_update, Agenda_progress table plus">
++      <created>1646729195485</created>
++      <option name="number" value="00029" />
++      <option name="presentableId" value="LOCAL-00029" />
++      <option name="project" value="LOCAL" />
++      <updated>1646729195485</updated>
++    </task>
++    <task id="LOCAL-00030" summary="api update">
++      <created>1646814861611</created>
++      <option name="number" value="00030" />
++      <option name="presentableId" value="LOCAL-00030" />
++      <option name="project" value="LOCAL" />
++      <updated>1646814861611</updated>
++    </task>
++    <task id="LOCAL-00031" summary="api update">
++      <created>1646818168505</created>
++      <option name="number" value="00031" />
++      <option name="presentableId" value="LOCAL-00031" />
++      <option name="project" value="LOCAL" />
++      <updated>1646818168505</updated>
++    </task>
++    <task id="LOCAL-00032" summary="api update">
++      <created>1646819064317</created>
++      <option name="number" value="00032" />
++      <option name="presentableId" value="LOCAL-00032" />
++      <option name="project" value="LOCAL" />
++      <updated>1646819064317</updated>
++    </task>
++    <option name="localTasksCounter" value="33" />
+     <servers />
+   </component>
+   <component name="ToolWindowManager">
+@@ -195,7 +410,30 @@
+   </component>
+   <component name="VcsManagerConfiguration">
+     <MESSAGE value="login_update" />
+-    <option name="LAST_COMMIT_MESSAGE" value="login_update" />
++    <MESSAGE value="secession_update" />
++    <MESSAGE value="update" />
++    <MESSAGE value="user_get_token" />
++    <MESSAGE value="api_token_check_ing" />
++    <MESSAGE value="user_completion" />
++    <MESSAGE value="meet_completion" />
++    <MESSAGE value="all_table_user_id_column_plus" />
++    <MESSAGE value="column_plus_meet_post_update" />
++    <MESSAGE value="column_delete" />
++    <MESSAGE value="agenda_completion" />
++    <MESSAGE value="action_completion" />
++    <MESSAGE value="agenda, action column_update" />
++    <MESSAGE value="rollback" />
++    <MESSAGE value="meet, agenda, action GET방식 update" />
++    <MESSAGE value="secession api delete" />
++    <MESSAGE value="selfcheck api completion" />
++    <MESSAGE value="agenda_update" />
++    <MESSAGE value="meet_delete" />
++    <MESSAGE value="user_update" />
++    <MESSAGE value="meet_update" />
++    <MESSAGE value="action_update" />
++    <MESSAGE value="action_update, Agenda_progress table plus" />
++    <MESSAGE value="api update" />
++    <option name="LAST_COMMIT_MESSAGE" value="api update" />
+   </component>
+   <component name="editorHistoryManager">
+     <entry file="file://$PROJECT_DIR$/backend/mysite/pybo/serializers.py">
+Index: backend/mysite/config/settings.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>\"\"\"\nDjango settings for config project.\n\nGenerated by 'django-admin startproject' using Django 3.1.3.\n\nFor more information on this file, see\nhttps://docs.djangoproject.com/en/3.1/topics/settings/\n\nFor the full list of settings and their values, see\nhttps://docs.djangoproject.com/en/3.1/ref/settings/\n\"\"\"\n\nfrom pathlib import Path\nimport os\nimport pymysql\nimport datetime\npymysql.install_as_MySQLdb()\n\n# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))\n# ROOT_DIR = os.path.dirname(BASE_DIR)\nBASE_DIR = Path(__file__).resolve().parent.parent\nSTATIC_URL = '/static/'\n\nSTATICFILES_DIRS = [\n    os.path.join(BASE_DIR, 'config', 'static')\n]\n\n# Quick-start development settings - unsuitable for production\n# See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/\n\n# SECURITY WARNING: keep the secret key used in production secret!\nSECRET_KEY = 'w=8akg)9oz+fc%chr39z5zalhva&8kznpd0jn_$5ba5v7i!#)k'\n\n# SECURITY WARNING: don't run with debug turned on in production!\nDEBUG = True\n\nALLOWED_HOSTS = [\"125.6.40.68\"]\n# ALLOWED_HOSTS = ['*']\n\n# Application definition\n\nINSTALLED_APPS = [\n    'django.contrib.admin',\n    'django.contrib.auth',\n    'django.contrib.contenttypes',\n    'django.contrib.sessions',\n    'django.contrib.messages',\n    'django.contrib.staticfiles',\n    'rest_framework',  # 추가\n    'corsheaders',  # 추가\n    'drf_yasg',  # 추가\n    'rest_framework.authtoken',\n    'pybo',\n]\n\nREST_FRAMEWORK = {\n    'DEFAULT_PERMISSION_CLASSES': [\n        'rest_framework.permissions.AllowAny',\n    ],\n    #로그인\n    'DEFAULT_RENDERER_CLASSES': (\n        'rest_framework.renderers.JSONRenderer',\n        'rest_framework.renderers.BrowsableAPIRenderer',\n    ),\n    'DEFAULT_AUTHENTICATION_CLASSES': (\n        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',\n    ),\n}\n\n#로그인\nJWT_AUTH = {\n    'JWT_SECRET_KEY': SECRET_KEY,\n    'JWT_ALGORITHM': 'HS256', #암호화 알고리즘\n    'JWT_ALLOW_REFRESH': False,\n    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=7),\n    # 'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=28),\n}\n\nMIDDLEWARE = [\n    'corsheaders.middleware.CorsMiddleware',  # 추가\n    'django.middleware.common.CommonMiddleware',  # 추가\n    'django.middleware.security.SecurityMiddleware',\n    'django.contrib.sessions.middleware.SessionMiddleware',\n    'django.middleware.common.CommonMiddleware',\n    'django.middleware.csrf.CsrfViewMiddleware',\n    'django.contrib.auth.middleware.AuthenticationMiddleware',\n    'django.contrib.messages.middleware.MessageMiddleware',\n    'django.middleware.clickjacking.XFrameOptionsMiddleware',\n]\n\nCORS_ORIGIN_WHITELIST = ['http://localhost:3000']\nCORS_ORIGIN_ALLOW_ALL = True\nCORS_ALLOW_CREDENTIALS = True\n\nROOT_URLCONF = 'config.urls'\n\nTEMPLATES = [\n    {\n        'BACKEND': 'django.template.backends.django.DjangoTemplates',\n        'DIRS': [],\n        'APP_DIRS': True,\n        'OPTIONS': {\n            'context_processors': [\n                'django.template.context_processors.debug',\n                'django.template.context_processors.request',\n                'django.contrib.auth.context_processors.auth',\n                'django.contrib.messages.context_processors.messages',\n            ],\n        },\n    },\n]\n\nWSGI_APPLICATION = 'config.wsgi.application'\n\n\nAUTH_PASSWORD_VALIDATORS = [\n    {\n        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',\n    },\n    {\n        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',\n    },\n]\n\nDATABASES = {\n\t'default': {\n    \t'ENGINE': 'django.db.backends.mysql',\n        'NAME': 'bside',\n        'USER': 'root',\n        'PASSWORD': '', #대영\n        'HOST': 'localhost',\n        'PORT': '3306',\n     }\n}\n\nLANGUAGE_CODE = 'ko-kr'\n\nTIME_ZONE = 'Asia/Seoul'\n\nUSE_I18N = True\n\nUSE_L10N = True\n\nUSE_TZ = True\n\n\n# STATIC_URL = '/static/'\n# STATIC_DIR = os.path.join(BASE_DIR, 'static')\n# STATICFILES_DIRS = [\n#     STATIC_DIR,\n# ]\n# STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')\n\n\nAUTH_USER_MODEL = 'pybo.User'\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/backend/mysite/config/settings.py b/backend/mysite/config/settings.py
+--- a/backend/mysite/config/settings.py	(revision a18dbd8c007d5588f9d63faff5d05b0edfb1e4c3)
++++ b/backend/mysite/config/settings.py	(date 1646918824926)
+@@ -34,8 +34,8 @@
+ # SECURITY WARNING: don't run with debug turned on in production!
+ DEBUG = True
+ 
+-ALLOWED_HOSTS = ["125.6.40.68"]
+-# ALLOWED_HOSTS = ['*']
++# ALLOWED_HOSTS = ["125.6.40.68"]
++ALLOWED_HOSTS = ['*']
+ 
+ # Application definition
+ 
+@@ -53,6 +53,8 @@
+     'pybo',
+ ]
+ 
++APPEND_SLASH = False
++
+ REST_FRAMEWORK = {
+     'DEFAULT_PERMISSION_CLASSES': [
+         'rest_framework.permissions.AllowAny',
+@@ -133,7 +135,7 @@
+     	'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'bside',
+         'USER': 'root',
+-        'PASSWORD': '', #대영
++        'PASSWORD': '1234qwer', #대영
+         'HOST': 'localhost',
+         'PORT': '3306',
+      }

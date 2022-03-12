@@ -277,10 +277,9 @@ class UserloginSerializer(serializers.Serializer):
         email = data.get('email', None)
         password = data.get('password', None)
         name = data.get('name', None)
-        nickname = data.get('nickname', None)
 
         try:
-            user = User.objects.get(email=email, name=name, nickname=nickname)
+            user = User.objects.get(email=email, name=name)
 
             if user.check_password(password):
                 payload = JWT_PAYLOAD_HANDLER(user)

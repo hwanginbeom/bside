@@ -23,6 +23,7 @@ class UserSerializer(serializers.ModelSerializer):
             'provider',
             'last_login',
             'img',
+            'emoji',
             'join_date',
         )
 
@@ -192,6 +193,12 @@ class SecessionSerializer(serializers.ModelSerializer):
             'cause',
             'reg_date',
         )
+
+
+class EmojiSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emoji
+        fields = '__all__'
 
 
 # 유저 db저장

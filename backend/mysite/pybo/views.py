@@ -1313,4 +1313,35 @@ class SelfCheckViewSet(viewsets.ModelViewSet):
             return Response(response_messages, status=status.HTTP_200_OK)
 
 
+class EmojiViewSet(viewsets.ModelViewSet):
+    queryset = Emoji.objects.all()
+    serializer_class = EmojiSerializer
+
+    def list(self, request, *args, **kwargs):
+        if TokenChk(request).chk() != 'None':
+            user_id = TokenChk(request).chk()
+
+            user_emoji = User.objects.get(id=user_id)
+
+            if user_emoji.emoji:
+                emoji_path = Emoji.objects.get(emoji_id=user_emoji.emoji)
+                res = {
+                    'emoji': emoji_path.emoji_path
+                }
+                return Response(res, status=status.HTTP_200_OK)
+            else:
+                res = {
+                    'emoji': 'None'
+                }
+                return Response(res, status=status.HTTP_200_OK)
+
+        else:
+            response_messages = {
+                'success': False,
+                'messages': 'token errors'
+            }
+            return Response(response_messages, status=status.HTTP_200_OK)
+
+
+
 

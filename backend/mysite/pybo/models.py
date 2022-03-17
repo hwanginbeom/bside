@@ -42,6 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     provider = models.CharField(max_length=200, null=True)
     last_login = models.DateTimeField(null=True)
     img = models.CharField(max_length=500, null=True)
+    emoji = models.CharField(max_length=50, null=True, blank=True, default="")
     join_date = models.DateTimeField(auto_now=True, null=True)
 
     USERNAME_FIELD = 'email'
@@ -137,3 +138,10 @@ class Secession(models.Model):
     def __str__(self):
         return str(self.email)
 
+
+class Emoji(models.Model):
+    emoji_id = models.AutoField(primary_key=True)
+    emoji_path = models.CharField(max_length=500, blank=True, null=True)
+
+    def __str__(self):
+        return str(self.emoji_path)

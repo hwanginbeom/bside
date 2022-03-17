@@ -10,6 +10,7 @@ router.register('agenda', views.AgendaViewSet)
 router.register('progress', views.ProgressViewSet)
 router.register('action', views.ActionViewSet)
 router.register('selfcheck', views.SelfCheckViewSet)
+router.register('emoji', views.EmojiViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),

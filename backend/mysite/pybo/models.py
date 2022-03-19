@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     provider = models.CharField(max_length=200, null=True)
     last_login = models.DateTimeField(null=True)
     img = models.CharField(max_length=500, null=True)
-    emoji = models.CharField(max_length=50, null=True, blank=True, default="")
+    emoji = models.CharField(max_length=50, null=True, blank=True, default="1")
     join_date = models.DateTimeField(auto_now=True, null=True)
 
     USERNAME_FIELD = 'email'

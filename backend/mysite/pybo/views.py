@@ -49,6 +49,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 'last_login': user_info.last_login,
                 'join_date': user_info.join_date,
                 'provider': user_info.provider,
+                'emoji': user_info.emoji,
             }
 
             return Response(user_info, status=status.HTTP_200_OK)

@@ -9,6 +9,8 @@ from rest_framework import generics, viewsets, status, filters, permissions
 from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from drf_yasg import openapi
 
 from .models import *
 from .serializers import *
@@ -230,7 +232,6 @@ class MeetViewSet(viewsets.ModelViewSet):
                 meet_info = {
                     "user_id": user_id,
                     "meet_title": request.data['meet_title'],
-                    "meet_date": datetime.strptime(request.data['meet_date'], "%Y-%m-%d %H:%M:%S"),
                     "meet_status": request.data['meet_status'],
                     "rm_status": request.data['rm_status'],
                     "participants": request.data['participants'],
@@ -1342,6 +1343,51 @@ class EmojiViewSet(viewsets.ModelViewSet):
     #             'messages': 'token errors'
     #         }
     #         return Response(response_messages, status=status.HTTP_200_OK)
+
+
+class MeetAll(APIView):
+
+    def get(self, request, *args, **kwargs):
+        user_id = TokenChk(request).chk()
+        if user_id != 'None':
+            meet_where = Q(user_id=user_id)
+
+            if 'meet_id' in request.GET:
+                meet_id = request.GET['meet_id']
+                meet_where.add(Q(meet_id=meet_id), meet_where.AND)
+            else:
+                return Response(status.HTTP_400_BAD_REQUEST)
+
+            if 'meet_status' in request.GET:
+                meet_where.add(Q(meet_status=request.GET['meet_status']), meet_where.AND)
+
+            if 'rm_status' in request.GET:
+                meet_where.add(Q(rm_status=request.GET['rm_status']), meet_where.AND)
+
+            meet_info = Meet.objects.filter(meet_where)
+            meet_serializer = MeetSerializer(meet_info, many=True)
+            meet_data = meet_serializer.data
+
+            agenda_info = Agenda.objects.prefetch_related('meet_id').filter(meet_id__meet_id=meet_id)
+            agenda_serializer = AgendaSerializer(agenda_info, many=True)
+            agenda_data = {"agenda": agenda_serializer.data}
+            meet_data.append(agenda_data)
+
+            action_info = Action.objects.prefetch_related('agenda_id').prefetch_related('agenda_id__meet_id').filter(agenda_id__meet_id__meet_id=meet_id)
+            action_serializer = ActionSerializer(action_info, many=True)
+            action_data = {"action": action_serializer.data}
+            meet_data.append(action_data)
+
+            return Response(meet_data)
+
+
+
+    def post(self, request):
+        print(self)
+        print(request)
+
+    def patch(self, request):
+        print("patch")
 
 
 

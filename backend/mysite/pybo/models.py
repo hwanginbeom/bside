@@ -65,7 +65,7 @@ class Meet(models.Model):
     user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     meet_id = models.AutoField(primary_key=True)
     meet_title = models.TextField(null=True)
-    meet_date = models.DateTimeField(null=True)
+    meet_date = models.DateTimeField(null=True, auto_now_add=True)
     meet_status = models.CharField(max_length=200, null=True)
     rm_status = models.CharField(max_length=200, null=True)
     participants = models.TextField(null=True)
@@ -86,6 +86,7 @@ class Agenda(models.Model):
     decisions = models.TextField(blank=True, null=True, default='')
     setting_time = models.IntegerField(blank=True, null=True)
     progress_time = models.TextField(blank=True, null=True, default='')
+    start_time = models.TextField(blank=True, null=True, default='')
     order_number = models.IntegerField(blank=True, null=True)
 
     def __str__(self):

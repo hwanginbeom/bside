@@ -14,5 +14,6 @@ router.register('emoji', views.EmojiViewSet)
 
 urlpatterns = [
     path('', include(router.urls)),
+    path('meetall/', views.MeetAll.as_view()),
 ]
 

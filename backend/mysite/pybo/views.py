@@ -1383,8 +1383,66 @@ class MeetAll(APIView):
 
 
     def post(self, request):
-        print(self)
-        print(request)
+        user_id = TokenChk(request).chk()
+        if user_id:
+            meet_data = request.data
+            meet_data['user_id'] = user_id
+            agenda_data = None
+            agenda_list = []
+            action_data = None
+            action_list = []
+            if 'agenda' in meet_data:
+                agenda_data = meet_data['agenda']
+                del meet_data['agenda']
+
+                serializer = MeetSerializer(data=meet_data)
+                serializer.is_valid()
+                serializer.save()
+
+                meet_id = serializer.data['meet_id']
+
+                for agenda in agenda_data:
+                    agenda['meet_id'] = meet_id
+                    if 'action' in agenda:
+                        action_data = agenda['action']
+
+                        del agenda['action']
+
+                        agenda_ser = AgendaSerializer(data=agenda)
+                        agenda_ser.is_valid()
+                        agenda_ser.save()
+
+                        agenda_data = agenda_ser.data
+                        agenda_id = agenda_data['agenda_id']
+
+                        for action in action_data:
+                            action['agenda_id'] = agenda_id
+
+                            action_ser = ActionSerializer(data=action)
+                            action_ser.is_valid()
+                            action_ser.save()
+
+                            action_list.append(action_ser.data)
+
+                        agenda_data['action'] = action_list
+                        agenda_list.append(agenda_data)
+
+                    else:
+                        agenda_ser = AgendaSerializer(data=agenda)
+                        agenda_ser.is_valid()
+                        agenda_ser.save()
+
+                        agenda_list.append(agenda_ser.data)
+
+                meet_data['agenda'] = agenda_list
+
+                return Response(meet_data, status=status.HTTP_200_OK)
+
+            else:
+                serializer = MeetSerializer(data=meet_data)
+                serializer.is_valid()
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
         print("patch")

@@ -232,6 +232,7 @@ class MeetViewSet(viewsets.ModelViewSet):
                 meet_info = {
                     "user_id": user_id,
                     "meet_title": request.data['meet_title'],
+                    "meet_date": request.data['meet_date'],
                     "meet_status": request.data['meet_status'],
                     "rm_status": request.data['rm_status'],
                     "participants": request.data['participants'],
@@ -1471,7 +1472,7 @@ class MeetAll(APIView):
                     if len(str(meet_data['goal'])) != 0:
                         meet_object.update(goal=meet_data['goal'])
                     if len(str(meet_data['meet_date'])) != 0:
-                        meet_object.update(meet_date=datetime.now())
+                        meet_object.update(meet_date=meet_data['meet_date'])
                     if len(str(meet_data['last_time'])) != 0:
                         meet_object.update(last_time=datetime.now())
                     last_meet_id = None

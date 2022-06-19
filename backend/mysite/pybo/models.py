@@ -65,7 +65,7 @@ class Meet(models.Model):
     user_id = models.ForeignKey('User', on_delete=models.CASCADE, db_column='id')
     meet_id = models.AutoField(primary_key=True)
     meet_title = models.TextField(null=True)
-    meet_date = models.DateTimeField(null=True, auto_now_add=True)
+    meet_date = models.DateTimeField(null=True)
     meet_status = models.CharField(max_length=200, null=True)
     rm_status = models.CharField(max_length=200, null=True)
     participants = models.TextField(null=True)

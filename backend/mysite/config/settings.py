@@ -34,8 +34,8 @@ SECRET_KEY = 'w=8akg)9oz+fc%chr39z5zalhva&8kznpd0jn_$5ba5v7i!#)k'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["125.6.40.68", "59mins.net", "125.6.39.225", "sublog.link ", "http://sublog.link ", "http://125.6.39.225:3000/"]
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ["125.6.40.68", "59mins.net", "125.6.39.225", "sublog.link ", "http://sublog.link ", "http://125.6.39.225:3000/","ec2-3-39-193-134.ap-northeast-2.compute.amazonaws.com","3.39.193.134","api.59mins.net"]
+#ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -132,7 +132,7 @@ DATABASES = {
 	'default': {
     	'ENGINE': 'django.db.backends.mysql',
         'NAME': 'bside',
-        'USER': 'root',
+        'USER': 'bside',
         'PASSWORD': 'bsideand59min', #대영
         'HOST': 'localhost',
         'PORT': '3306',

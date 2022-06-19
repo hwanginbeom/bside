@@ -1445,8 +1445,189 @@ class MeetAll(APIView):
                 return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request):
-        print("patch")
+        user_id = TokenChk(request).chk()
+        if user_id:
+            meet_data = request.data
+            meet_data['user_id'] = user_id
+            agenda_data = None
+            agenda_list = []
+            action_data = None
+            action_list = []
+            if 'agenda' in meet_data:
+                agenda_data = meet_data['agenda']
+                del meet_data['agenda']
+                meet_id = meet_data['meet_id']
 
+                if len(str(meet_id)) != 0:
+                    meet_object = Meet.objects.filter(meet_id=meet_data['meet_id'])
+                    if len(str(meet_data['meet_title'])) != 0:
+                        meet_object.update(meet_title=meet_data['meet_title'])
+                    if len(str(meet_data['meet_status'])) != 0:
+                        meet_object.update(meet_status=meet_data['meet_status'])
+                    if len(str(meet_data['rm_status'])) != 0:
+                        meet_object.update(rm_status=meet_data['rm_status'])
+                    if len(str(meet_data['participants'])) != 0:
+                        meet_object.update(participants=meet_data['participants'])
+                    if len(str(meet_data['goal'])) != 0:
+                        meet_object.update(goal=meet_data['goal'])
+                    if len(str(meet_data['meet_date'])) != 0:
+                        meet_object.update(meet_date=datetime.now())
+                    if len(str(meet_data['last_time'])) != 0:
+                        meet_object.update(last_time=datetime.now())
+                    last_meet_id = None
+                else:
+                    delete_valid = []
+                    for valid in meet_data:
+                        if len(str(meet_data[valid])) == 0:
+                            delete_valid.append(valid)
+                    for valid in delete_valid:
+                        del meet_data[valid]
+                    serializer = MeetSerializer(data=meet_data)
+                    serializer.is_valid()
+                    serializer.save()
+
+                    last_meet_id = str(Meet.objects.last())
+
+                for agenda in agenda_data:
+                    agenda['meet_id'] = meet_id
+                    if 'action' in agenda:
+                        action_data = agenda['action']
+                        del agenda['action']
+
+                        agenda_ser = AgendaSerializer(data=agenda)
+                        agenda_ser.is_valid()
+
+                        agenda_data = agenda_ser.data
+                        agenda_id = agenda['agenda_id']
+                        if len(str(agenda_id)) != 0:
+                            agenda_object = Agenda.objects.filter(agenda_id=agenda['agenda_id'])
+                            if len(str(agenda['agenda_title'])) != 0:
+                                agenda_object.update(agenda_title=agenda['agenda_title'])
+                            if len(str(agenda['agenda_status'])) != 0:
+                                agenda_object.update(agenda_status=agenda['agenda_status'])
+                            if len(str(agenda['discussion'])) != 0:
+                                agenda_object.update(discussion=agenda['discussion'])
+                            if len(str(agenda['decisions'])) != 0:
+                                agenda_object.update(decisions=agenda['decisions'])
+                            if len(str(agenda['setting_time'])) != 0:
+                                agenda_object.update(setting_time=agenda['setting_time'])
+                            if len(str(agenda['progress_time'])) != 0:
+                                agenda_object.update(progress_time=agenda['progress_time'])
+                            if len(str(agenda['start_time'])) != 0:
+                                agenda_object.update(start_time=agenda['start_time'])
+                            if len(str(agenda['order_number'])) != 0:
+                                agenda_object.update(order_number=agenda['order_number'])
+                            last_agenda_id = None
+                        else:
+                            delete_valid = []
+                            for valid in agenda:
+                                if len(str(agenda[valid])) == 0:
+                                    delete_valid.append(valid)
+                            for valid in delete_valid:
+                                del agenda[valid]
+
+                            if last_meet_id != None:
+                                agenda['meet_id'] = last_meet_id
+                            agenda_ser = AgendaSerializer(data=agenda)
+                            agenda_ser.is_valid()
+                            agenda_ser.save()
+
+                            last_agenda_id = str(Agenda.objects.last())
+
+
+                        for action in action_data:
+                            action['agenda_id'] = agenda_id
+                            action_id = action['action_id']
+
+                            action_ser = ActionSerializer(data=action)
+                            action_ser.is_valid()
+                            if len(str(action_id)) != 0:
+                                action_object = Action.objects.filter(action_id=action['action_id'])
+                                if len(str(action['action_title'])) != 0:
+                                    action_object.update(action_title=action['action_title'])
+                                if len(str(action['person'])) != 0:
+                                    action_object.update(person=action['person'])
+                                if len(str(action['dead_line'])) != 0:
+                                    action_object.update(dead_line=action['dead_line'])
+                            else:
+                                delete_valid = []
+                                for valid in action:
+                                    if len(str(action[valid])) == 0:
+                                        delete_valid.append(valid)
+                                for valid in delete_valid:
+                                    del action[valid]
+                                if last_agenda_id != None:
+                                    action['agenda_id'] = last_agenda_id
+                                action_ser = ActionSerializer(data=action)
+                                action_ser.is_valid()
+                                action_ser.save()
+
+                            action_list.append(action_ser.data)
+                        agenda_data['action'] = action_list
+                        agenda_list.append(agenda_data)
+
+
+                    else:
+                        agenda_ser = AgendaSerializer(data=agenda)
+                        agenda_ser.is_valid()
+
+                        agenda_id = agenda['agenda_id']
+                        if len(str(agenda_id)) != 0:
+                            agenda_object = Agenda.objects.filter(agenda_id=agenda['agenda_id'])
+                            if len(str(agenda['agenda_title'])) != 0:
+                                agenda_object.update(agenda_title=agenda['agenda_title'])
+                            if len(str(agenda['agenda_status'])) != 0:
+                                agenda_object.update(agenda_status=agenda['agenda_status'])
+                            if len(str(agenda['discussion'])) != 0:
+                                agenda_object.update(discussion=agenda['discussion'])
+                            if len(str(agenda['decisions'])) != 0:
+                                agenda_object.update(decisions=agenda['decisions'])
+                            if len(str(agenda['setting_time'])) != 0:
+                                agenda_object.update(setting_time=agenda['setting_time'])
+                            if len(str(agenda['progress_time'])) != 0:
+                                agenda_object.update(progress_time=agenda['progress_time'])
+                            if len(str(agenda['start_time'])) != 0:
+                                agenda_object.update(start_time=agenda['start_time'])
+                            if len(str(agenda['order_number'])) != 0:
+                                agenda_object.update(order_number=agenda['order_number'])
+
+                        else:
+                            delete_valid = []
+                            for valid in agenda:
+                                if len(str(agenda[valid])) == 0:
+                                    delete_valid.append(valid)
+                            for valid in delete_valid:
+                                del agenda[valid]
+
+                            if last_meet_id != None:
+                                agenda['meet_id'] = last_meet_id
+                            agenda_ser = AgendaSerializer(data=agenda)
+                            agenda_ser.is_valid()
+                            agenda_ser.save()
+
+                        agenda_list.append(agenda_ser.data)
+
+                meet_data['agenda'] = agenda_list
+
+                return Response(meet_data, status=status.HTTP_200_OK)
+
+            else:
+                serializer = MeetSerializer(data=meet_data)
+                serializer.is_valid()
+                serializer.save()
+                return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def delete(self, request):
+        user_id = TokenChk(request).chk()
+        if user_id:
+            meet_data = request.data
+            meet_id = meet_data['meet_id']
+
+            agenda_datas = Agenda.objects.filter(meet_id=meet_id)
+            for agenda in agenda_datas :
+                agenda_object = Agenda.objects.filter(agenda_id=str(agenda))
+                agenda_object.delete()
+        return Response(status=status.HTTP_200_OK)
 
 
 
